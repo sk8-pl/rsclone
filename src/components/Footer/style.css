@@ -1,0 +1,26 @@
+.footer .container {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.social-menu {
+  list-style-type: none;
+  display: flex;
+}
+.social-link {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  margin: 0 10px;
+}
+.instagram-link {
+  background-image: url(../../assets/inst.png);
+}
+.fb-link {
+  background-image: url(../../assets/fb.png);
+}
+.twitter-link {
+  background-image: url(../../assets/twitter.png);
+}
