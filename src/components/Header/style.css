@@ -1,0 +1,55 @@
+.header {
+  background: #ffffff;
+  box-shadow: 0px 10px 20px rgba(31, 32, 65, 0.05);
+  height: 70px;
+}
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  background-image: url(../../assets/logo.png);
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+  margin-right: 10px;
+}
+.logo-text {
+  font-weight: 500;
+  font-size: 18px;
+}
+.header-btns {
+  display: flex;
+}
+.header-btn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+  height: 40px;
+  text-transform: uppercase;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  cursor: pointer;
+}
+.sign-in {
+  color: #8ba4f9;
+  background-color: transparent;
+  border: 1px solid #8ba4f9;
+  margin-right: 20px;
+}
+.sign-up {
+  background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
+  color: #fff;
+  border: none;
+}
