@@ -13,11 +13,13 @@ const HotelCard = () => (
     <hr className="card-info-line" />
     <div className="hotel-card-info">
       <div className="info-raiting">
-        <span className="rating-star"></span>
-        <span className="rating-star"></span>
-        <span className="rating-star"></span>
-        <span className="rating-star"></span>
-        <span className="rating-star non-filled"></span>
+        {[...Array(5)].map((elem, i, arr) => (
+          <span
+            className={`rating-star ${
+              i === arr.length - 1 ? "non-filled" : ""
+            }`}
+          ></span>
+        ))}
       </div>
       <div className="info-reviews">
         <b>145</b> Отзывов
