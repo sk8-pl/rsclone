@@ -28,6 +28,7 @@
   border: 1px solid rgba(31, 32, 65, 0.25);
   border-radius: 4px;
   padding: 0 15px;
+  font-size: 16px;
 }
 .change-filter-btn {
   position: relative;
@@ -70,8 +71,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 40px;
 }
 .comfortables-select {
+  position: absolute;
+  z-index: 100;
   width: 266px;
   padding-left: 15px;
   padding-right: 7px;
@@ -81,6 +85,7 @@
   border-top: none;
   box-shadow: 0px 10px 20px rgba(31, 32, 65, 0.05);
   border-radius: 4px;
+  background-color: #fff;
 }
 .comfortable-name {
   font-weight: bold;
@@ -116,6 +121,7 @@
   color: rgba(31, 32, 65, 0.7);
   cursor: pointer;
   transition: 0.2s;
+  user-select: none;
 }
 .comf-btn:hover {
   background-color: #bc9cff;
@@ -138,4 +144,55 @@
   width: 85%;
   color: rgba(31, 32, 65, 0.7);
   font-size: 14px;
+}
+
+::-webkit-calendar-picker-indicator {
+  color: transparent;
+  opacity: 1;
+  background: url(./../../assets/more.png) no-repeat center;
+  background-size: contain;
+  width: 20px;
+  height: 15px;
+}
+.hotels-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page {
+  color: rgba(31, 32, 65, 0.5);
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-right: 10px;
+}
+.page:hover {
+  background-color: #ece3ff;
+}
+.active-page {
+  background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
+  color: #fff;
+}
+.next-page {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(180deg, #6fcf97 0%, #66d2ea 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+.hidden {
+  display: none;
 }

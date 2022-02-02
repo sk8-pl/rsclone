@@ -10,6 +10,7 @@
 .social-menu {
   list-style-type: none;
   display: flex;
+  align-items: center;
 }
 .social-link {
   display: block;
@@ -17,13 +18,23 @@
   height: 30px;
   background-size: contain;
   margin: 0 10px;
+  background-color: #bc9cff;
+  transition: 0.2s;
 }
 .instagram-link {
-  background-image: url(../../assets/inst.png);
+  width: 40px;
+  height: 40px;
+  -webkit-mask-image: url(../../assets/inst.svg);
+  mask-image: url(../../assets/inst.svg);
 }
 .fb-link {
-  background-image: url(../../assets/fb.png);
+  -webkit-mask-image: url(../../assets/fb.svg);
+  mask-image: url(../../assets/fb.svg);
 }
 .twitter-link {
-  background-image: url(../../assets/twitter.png);
+  -webkit-mask-image: url(../../assets/twitter.svg);
+  mask-image: url(../../assets/twitter.svg);
+}
+.social-link:hover {
+  background-color: #66d2ea;
 }

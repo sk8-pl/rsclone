@@ -6,6 +6,7 @@
   margin-bottom: 25px;
 }
 .hotel-card-img {
+  position: relative;
   width: 100%;
   height: 250px;
   background-image: url(../../../../assets/hotel-example.png);
@@ -63,4 +64,18 @@
   font-size: 18px;
   line-height: 18px;
   color: rgba(31, 32, 65, 0.7);
+}
+.favorite-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-image: url(../../../../assets/not-favorite.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+.favorite {
+  background-image: url(../../../../assets/favorite.png);
 }
