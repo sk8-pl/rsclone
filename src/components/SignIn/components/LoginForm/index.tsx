@@ -4,7 +4,7 @@ import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 const LoginForm = () => {
-  const onFinish = (values: any) => {
+  const onFinish = (values: unknown) => {
     console.log("Received values of form: ", values);
   };
 
