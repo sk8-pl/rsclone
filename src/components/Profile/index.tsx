@@ -1,58 +1,60 @@
 import "./style.css";
+import { Avatar, Button, Card, Rate } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { BookingCard } from "./components/BookingCard";
+import { changeUserInput } from "./helpers/changeUserInput";
+import { userInfo, userInfoTitles } from "./constants/userInfo";
+import { UploadPhoto } from "./components/UploadPhoto";
+import { FavoriteHotelCard } from "./components/FavoriteHotelCard";
 
 const Profile = () => (
   <div className="profile">
     <div className="container">
       <div className="profile-info">
-        <div className="avatar-img"></div>
+        <div className="user-avatar">
+          <Avatar
+            size={300}
+            icon={<UserOutlined />}
+            style={{ marginBottom: "20px" }}
+          />
+          <UploadPhoto />
+        </div>
         <div className="user-info">
           <div className="greeting">Здравствуйте, User! Рады видеть вас!</div>
           <div className="wrapper-info">
             <span className="info-title">Редактировать информацию о себе:</span>
-            <div className="info-block">
-              <span className="info-name">Имя</span>
-              <input type="text" className="info-input" />
-            </div>
-            <div className="info-block">
-              <span className="info-name">Фамилия</span>
-              <input type="text" className="info-input" />
-            </div>
-            <div className="info-block">
-              <span className="info-name">E-mail</span>
-              <input type="text" className="info-input" />
-            </div>
-            <div className="info-block">
-              <span className="info-name">Телефон</span>
-              <input type="text" className="info-input" />
-            </div>
-          </div>
-          <div className="booking-info">
-            <span className="info-title">Ваши бронирования:</span>
-            <div className="booking-item">
-              <div className="booking-img"></div>
-              <div className="booking-hotel-info">
-                <span className="hotel-info hotel-info-name">
-                  Hotel Park Inn
-                </span>
-                <span className="hotel-info">20 дек. 2018 - 13 янв. 2019</span>
+            {userInfoTitles.map((val, index) => (
+              <div className="info-block">
+                <span className="info-name">{val}</span>
+                <input
+                  type="text"
+                  className="info-input"
+                  disabled
+                  placeholder={userInfo[index]}
+                />
+                <Button type="primary" onClick={changeUserInput}>
+                  Изменить
+                </Button>
               </div>
-              <span className="hotel-info-name">
-                <b>14 000</b>
-              </span>
-            </div>
-            <div className="booking-item">
-              <div className="booking-img"></div>
-              <div className="booking-hotel-info">
-                <span className="hotel-info hotel-info-name">
-                  Hotel Park Inn
-                </span>
-                <span className="hotel-info">20 дек. 2018 - 13 янв. 2019</span>
-              </div>
-              <span className="hotel-info-name">
-                <b>14 000</b>
-              </span>
-            </div>
+            ))}
           </div>
+        </div>
+      </div>
+
+      <div className="booking-info">
+        <span className="info-title">Ваши бронирования:</span>
+        <div className="booking-cards-container">
+          <BookingCard />
+          <BookingCard />
+          <BookingCard />
+        </div>
+      </div>
+      <div className="booking-info">
+        <span className="info-title">Избранное:</span>
+        <div className="favorite-hotels-cards">
+          <FavoriteHotelCard />
+          <FavoriteHotelCard />
+          <FavoriteHotelCard />
         </div>
       </div>
     </div>

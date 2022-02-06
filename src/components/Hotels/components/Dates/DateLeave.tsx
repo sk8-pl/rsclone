@@ -1,6 +1,12 @@
+import { DatePicker } from "antd";
+
 export const DateLeave = () => (
-  <div className="filter-block">
+  <>
     <span className="filter-title">дата выезда</span>
-    <input type="date" className="filter-info" />
-  </div>
+    <DatePicker
+      size="large"
+      style={{ width: "266px" }}
+      placeholder="Выбрать дату"
+    />
+  </>
 );
