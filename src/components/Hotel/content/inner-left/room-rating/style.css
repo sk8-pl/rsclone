@@ -1,8 +1,9 @@
+@import '~antd/dist/antd.css';
+
 .room-rating {
     width: 45%;
 }
 
 .plug-rating {
-    background-color: #e09393;
     height: 300px;
 }

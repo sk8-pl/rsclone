@@ -20,10 +20,10 @@
 
 .collage-img_right {
     height: 100%;
-    background-image: url('https://via.placeholder.com/1000x500');
+    /* background-image: url('https://via.placeholder.com/1000x500'); */
 }
 
 .collage-img_left {
     height: 50%;
-    background-image: url('https://via.placeholder.com/1000x500');
+    /* background-image: url('https://via.placeholder.com/1000x500'); */
 }
