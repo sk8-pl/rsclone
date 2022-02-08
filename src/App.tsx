@@ -4,6 +4,7 @@ import { routes } from "./components/helpers/routes";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { SettingsContainer } from "./context/StoreContext";
+import "antd/dist/antd.css";
 
 const App = () => (
   <SettingsContainer>

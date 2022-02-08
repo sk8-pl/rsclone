@@ -39,31 +39,12 @@
   line-height: 18px;
   color: rgba(31, 32, 65, 0.7);
 }
-.info-raiting {
-  display: flex;
-}
 .card-info-line {
   width: 87%;
   background: rgba(31, 32, 65, 0.3);
   border: none;
   height: 1px;
   margin: auto;
-}
-.rating-star {
-  margin: 2px;
-  width: 25px;
-  height: 25px;
-  background-image: url(../../../../assets/active-star.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.non-filled {
-  background-image: url(../../../../assets/star.png);
-}
-.info-reviews {
-  font-size: 18px;
-  line-height: 18px;
-  color: rgba(31, 32, 65, 0.7);
 }
 .favorite-icon {
   position: absolute;

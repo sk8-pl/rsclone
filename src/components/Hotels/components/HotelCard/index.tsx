@@ -1,3 +1,4 @@
+import { Rate } from "antd";
 import { useState } from "react";
 import "./style.css";
 
@@ -20,15 +21,7 @@ const HotelCard = () => {
       </div>
       <hr className="card-info-line" />
       <div className="hotel-card-info">
-        <div className="info-raiting">
-          {[...Array(5)].map((elem, i, arr) => (
-            <span
-              className={`rating-star ${
-                i === arr.length - 1 ? "non-filled" : ""
-              }`}
-            ></span>
-          ))}
-        </div>
+        <Rate style={{ color: "#BC9CFF" }} />
         <div className="info-reviews">
           <b>145</b> Отзывов
         </div>
