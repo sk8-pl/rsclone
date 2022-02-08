@@ -12,7 +12,6 @@ const Hotels = () => {
       try {
         const response = await fetch("hotels.json");
         const json = await response.json();
-        console.log(json.result);
         setData(json.result);
       } catch (error) {
         console.log("error", error);
