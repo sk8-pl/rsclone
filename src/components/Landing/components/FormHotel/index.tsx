@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./style.css";
 
 const FormHotel = () => (
@@ -37,7 +38,9 @@ const FormHotel = () => (
         <option value="">Младенцы</option>
       </select>
     </div>
-    <button className="find-hotel__button">подобрать номер</button>
+    <Link className="find-hotel__button" to="/hotels">
+      подобрать номер
+    </Link>
   </form>
 );
 

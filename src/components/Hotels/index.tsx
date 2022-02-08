@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HotelCard from "./components/HotelCard";
 import { filterComponents } from "./constants/filterParams";
 import "./style.css";
 
 const Hotels = () => {
   const [page, setPage] = useState(0);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("hotels.json");
+        const json = await response.json();
+        console.log(json.result);
+        setData(json.result);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="hotels">
       <div className="container">
@@ -18,9 +34,9 @@ const Hotels = () => {
             Номера, которые мы для вас подобрали
           </div>
           <div className="hotels-cards-container">
-            {[...Array(15)].map(() => (
-              <HotelCard />
-            ))}
+            {data.map((val) => {
+              return <HotelCard data={val} />;
+            })}
           </div>
           <div className="hotels-pagination">
             {[1, 2, 3, 4, 5].map((value, index) => (
