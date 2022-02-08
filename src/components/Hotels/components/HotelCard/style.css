@@ -1,9 +1,15 @@
 .hotel-card {
+  position: relative;
   width: 400px;
   box-shadow: 0px 10px 20px rgba(31, 32, 65, 0.1);
   border-radius: 4px;
   padding-bottom: 20px;
   margin-bottom: 25px;
+  color: #000;
+  padding-bottom: 70px;
+}
+.hotel-card:hover {
+  color: #000;
 }
 .hotel-name {
   display: block;
@@ -69,4 +75,9 @@
 }
 .favorite {
   background-image: url(../../../../assets/favorite.png);
+}
+.more-hotel-btn {
+  position: absolute !important;
+  right: 20px;
+  bottom: 20px;
 }

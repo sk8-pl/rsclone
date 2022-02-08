@@ -1,5 +1,6 @@
-import { Rate } from "antd";
+import { Button, Rate } from "antd";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 const HotelCard = (props: any) => {
@@ -35,6 +36,9 @@ const HotelCard = (props: any) => {
         />
         <span>{props.data.review_score_word}</span>
       </div>
+      <Link to="/hotel">
+        <Button className="more-hotel-btn">Подробнее</Button>
+      </Link>
     </div>
   );
 };
