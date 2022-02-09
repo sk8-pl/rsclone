@@ -1,5 +1,5 @@
 import Hotel from "../Hotel";
-import Hotels from "../Hotels";
+import { Hotels } from "../Hotels";
 import Landing from "../Landing";
 import Profile from "../Profile";
 import Registration from "../Registration";
