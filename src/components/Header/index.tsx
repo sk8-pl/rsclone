@@ -19,8 +19,12 @@ const Header = () => (
           />
         </Link>
 
-        <button className="header-btn sign-in">войти</button>
-        <button className="header-btn sign-up">зарегистрироваться</button>
+        <Link className="header-btn sign-in" to="/sign-in">
+          войти
+        </Link>
+        <Link className="header-btn sign-up" to="/registration">
+          зарегистрироваться
+        </Link>
       </div>
     </div>
   </div>
