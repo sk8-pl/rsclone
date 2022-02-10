@@ -1,6 +1,8 @@
 import "antd/dist/antd.css";
 import "./style.css";
 import { Form, Input, Select, Button, DatePicker } from "antd";
+import { useState } from "react";
+import { useHttp } from "../../../../hooks/http.hooks";
 
 const { Option } = Select;
 
@@ -32,6 +34,25 @@ const config = {
 };
 
 const RegistrationForm = () => {
+  const { loading, error, request } = useHttp();
+  const [forms, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const changeHandler = (event: { target: { name: any; value: any } }) => {
+    setForm({ ...forms, [event.target.name]: event.target.value });
+  };
+
+  const reqisterHandler = async () => {
+    try {
+      const data = await request("register", "POST", { ...forms });
+      console.log(data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
   const [form] = Form.useForm();
 
   const onFinish = (values: unknown) => {
@@ -59,7 +80,7 @@ const RegistrationForm = () => {
       }}
       scrollToFirstError
     >
-      <Form.Item
+      {/* <Form.Item
         name="Name"
         label="Name"
         tooltip="What do you want others to call you?"
@@ -100,7 +121,7 @@ const RegistrationForm = () => {
       </Form.Item>
       <Form.Item name="date-picker" label="DatePicker" {...config}>
         <DatePicker style={{ width: "100%" }} />
-      </Form.Item>
+      </Form.Item> */}
       <Form.Item
         name="email"
         label="E-mail"
@@ -115,7 +136,7 @@ const RegistrationForm = () => {
           },
         ]}
       >
-        <Input />
+        <Input name="email" onChange={changeHandler} />
       </Form.Item>
 
       <Form.Item
@@ -129,10 +150,10 @@ const RegistrationForm = () => {
         ]}
         hasFeedback
       >
-        <Input.Password />
+        <Input.Password name="password" onChange={changeHandler} />
       </Form.Item>
 
-      <Form.Item
+      {/* <Form.Item
         name="confirm"
         label="Confirm Password"
         dependencies={["password"]}
@@ -170,13 +191,15 @@ const RegistrationForm = () => {
         rules={[{ message: "Please input Intro" }]}
       >
         <Input.TextArea showCount maxLength={100} />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item {...tailFormItemLayout}>
         <Button
           type="primary"
           htmlType="submit"
           className="registration-button"
+          onClick={reqisterHandler}
+          disabled={loading}
         >
           Register
         </Button>
