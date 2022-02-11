@@ -29,18 +29,18 @@ const tailFormItemLayout = {
   },
 };
 
-const config = {
-  rules: [{ type: "object" as const, message: "Please select time!" }],
-};
-
 const RegistrationForm = () => {
   const { loading, error, request } = useHttp();
   const [forms, setForm] = useState({
     email: "",
     password: "",
+    name: "",
+    surname: "",
+    phone: "",
   });
 
   const changeHandler = (event: { target: { name: any; value: any } }) => {
+    console.log(event.target.name, event.target.value);
     setForm({ ...forms, [event.target.name]: event.target.value });
   };
 
@@ -59,15 +59,6 @@ const RegistrationForm = () => {
     console.log("Received values of form: ", values);
   };
 
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 100 }}>
-        <Option value="375">+375</Option>
-        <Option value="7">+7</Option>
-        <Option value="380">+380</Option>
-      </Select>
-    </Form.Item>
-  );
   return (
     <Form
       {...formItemLayout}
@@ -80,59 +71,43 @@ const RegistrationForm = () => {
       }}
       scrollToFirstError
     >
-      {/* <Form.Item
-        name="Name"
-        label="Name"
-        tooltip="What do you want others to call you?"
+      <Form.Item
+        name="name"
+        label="Имя"
+        tooltip="Как вас зовут?"
         rules={[
           {
             required: true,
-            message: "Please input your name!",
+            message: "Пожалуйста, введите свое имя!",
             whitespace: true,
           },
         ]}
       >
-        <Input />
+        <Input name="name" onChange={changeHandler} />
       </Form.Item>
       <Form.Item
         name="surname"
-        label="Surname"
-        tooltip="What do you want others to call you?"
+        label="Фамилия"
         rules={[
           {
-            required: true,
-            message: "Please input your surname!",
+            message: "Пожалуйста, введите свою фамиилю!",
             whitespace: true,
           },
         ]}
       >
-        <Input />
+        <Input name="surname" onChange={changeHandler} />
       </Form.Item>
-      <Form.Item
-        name="gender"
-        label="Gender"
-        rules={[{ message: "Please select gender!" }]}
-      >
-        <Select placeholder="select your gender">
-          <Option value="male">Male</Option>
-          <Option value="female">Female</Option>
-          <Option value="other">Other</Option>
-        </Select>
-      </Form.Item>
-      <Form.Item name="date-picker" label="DatePicker" {...config}>
-        <DatePicker style={{ width: "100%" }} />
-      </Form.Item> */}
       <Form.Item
         name="email"
         label="E-mail"
         rules={[
           {
             type: "email",
-            message: "The input is not valid E-mail!",
+            message: "Некорректный E-mail!",
           },
           {
             required: true,
-            message: "Please input your E-mail!",
+            message: "Введите E-mail!",
           },
         ]}
       >
@@ -141,11 +116,11 @@ const RegistrationForm = () => {
 
       <Form.Item
         name="password"
-        label="Password"
+        label="Пароль"
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            message: "Введите пароль!",
           },
         ]}
         hasFeedback
@@ -153,24 +128,22 @@ const RegistrationForm = () => {
         <Input.Password name="password" onChange={changeHandler} />
       </Form.Item>
 
-      {/* <Form.Item
+      <Form.Item
         name="confirm"
-        label="Confirm Password"
+        label="Повторите пароль"
         dependencies={["password"]}
         hasFeedback
         rules={[
           {
             required: true,
-            message: "Please confirm your password!",
+            message: "Повторите пароль!",
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
               if (!value || getFieldValue("password") === value) {
                 return Promise.resolve();
               }
-              return Promise.reject(
-                new Error("The two passwords that you entered do not match!")
-              );
+              return Promise.reject(new Error("Пароли не совпадают!"));
             },
           }),
         ]}
@@ -179,19 +152,15 @@ const RegistrationForm = () => {
       </Form.Item>
       <Form.Item
         name="phone"
-        label="Phone Number"
-        rules={[{ message: "Please input your phone number!" }]}
+        label="Номер телефона"
+        rules={[{ message: "Введите номер телефона!" }]}
       >
-        <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
+        <Input
+          name="phone"
+          style={{ width: "100%" }}
+          onChange={changeHandler}
+        />
       </Form.Item>
-
-      <Form.Item
-        name="intro"
-        label="Intro"
-        rules={[{ message: "Please input Intro" }]}
-      >
-        <Input.TextArea showCount maxLength={100} />
-      </Form.Item> */}
 
       <Form.Item {...tailFormItemLayout}>
         <Button
