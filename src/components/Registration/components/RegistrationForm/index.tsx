@@ -1,10 +1,8 @@
 import "antd/dist/antd.css";
 import "./style.css";
-import { Form, Input, Select, Button, DatePicker } from "antd";
+import { Form, Input, Button } from "antd";
 import { useState } from "react";
 import { useHttp } from "../../../../hooks/http.hooks";
-
-const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {
@@ -76,7 +74,7 @@ const RegistrationForm = () => {
           },
         ]}
       >
-        <Input name="name" onChange={changeHandler} />
+        <Input name="name" placeholder="Введите имя" onChange={changeHandler} />
       </Form.Item>
       <Form.Item
         name="surname"
@@ -88,7 +86,11 @@ const RegistrationForm = () => {
           },
         ]}
       >
-        <Input name="surname" onChange={changeHandler} />
+        <Input
+          name="surname"
+          placeholder="Введите фамилию"
+          onChange={changeHandler}
+        />
       </Form.Item>
       <Form.Item
         name="email"
@@ -104,7 +106,11 @@ const RegistrationForm = () => {
           },
         ]}
       >
-        <Input name="email" onChange={changeHandler} />
+        <Input
+          name="email"
+          placeholder="Введите E-mail"
+          onChange={changeHandler}
+        />
       </Form.Item>
 
       <Form.Item
@@ -118,7 +124,11 @@ const RegistrationForm = () => {
         ]}
         hasFeedback
       >
-        <Input.Password name="password" onChange={changeHandler} />
+        <Input.Password
+          name="password"
+          placeholder="Введите пароль"
+          onChange={changeHandler}
+        />
       </Form.Item>
 
       <Form.Item
@@ -141,7 +151,7 @@ const RegistrationForm = () => {
           }),
         ]}
       >
-        <Input.Password />
+        <Input.Password placeholder="Повторите пароль" />
       </Form.Item>
       <Form.Item
         name="phone"
@@ -150,6 +160,7 @@ const RegistrationForm = () => {
       >
         <Input
           name="phone"
+          placeholder="Введите номер телефона"
           style={{ width: "100%" }}
           onChange={changeHandler}
         />
