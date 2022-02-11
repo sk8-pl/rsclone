@@ -5,6 +5,7 @@ import React from "react";
 
 interface NumbersPhoto {
   num: number;
+  idHotel: number;
 }
 
 const ImageHotel = (props: NumbersPhoto) => {
@@ -30,7 +31,7 @@ const ImageHotel = (props: NumbersPhoto) => {
 
     xhr.open(
       "GET",
-      "https://booking-com.p.rapidapi.com/v1/hotels/photos?hotel_id=1377073&locale=ru"
+      `https://booking-com.p.rapidapi.com/v1/hotels/photos?hotel_id=${props.idHotel}&locale=ru`
     );
     xhr.setRequestHeader("x-rapidapi-host", "booking-com.p.rapidapi.com");
     xhr.setRequestHeader(
