@@ -40,7 +40,6 @@ const RegistrationForm = () => {
   });
 
   const changeHandler = (event: { target: { name: any; value: any } }) => {
-    console.log(event.target.name, event.target.value);
     setForm({ ...forms, [event.target.name]: event.target.value });
   };
 
@@ -55,17 +54,12 @@ const RegistrationForm = () => {
 
   const [form] = Form.useForm();
 
-  const onFinish = (values: unknown) => {
-    console.log("Received values of form: ", values);
-  };
-
   return (
     <Form
       {...formItemLayout}
       form={form}
       name="register"
       className="registration__form"
-      onFinish={onFinish}
       initialValues={{
         prefix: "375",
       }}
@@ -74,7 +68,6 @@ const RegistrationForm = () => {
       <Form.Item
         name="name"
         label="Имя"
-        tooltip="Как вас зовут?"
         rules={[
           {
             required: true,
