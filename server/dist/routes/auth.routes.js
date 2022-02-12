@@ -30,13 +30,13 @@ router.post("/register", [
                 .status(400)
                 .json({ errors: errors.array(), massage: "Error in data" });
         }
-        const { email, password } = req.body;
+        const { email, password, name, phone, surname } = req.body;
         const candidate = yield User_1.default.findOne({ email });
         if (candidate) {
             return res.status(400).json({ massage: "Person exist!" });
         }
         const hashedPassword = yield bcrypt_1.default.hash(password, 12);
-        const user = new User_1.default({ email, password: hashedPassword });
+        const user = new User_1.default({ email, password: hashedPassword, name, phone, surname });
         yield user.save();
         res.status(201).json({ message: "creating user accounts" });
     }
