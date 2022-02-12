@@ -5,7 +5,7 @@ import "./style.css";
 
 const HotelCard = (props: any) => {
   const [favorite, setFavorite] = useState(false);
-  console.log(props.data.review_score / 2);
+
   return (
     <div className="hotel-card">
       <div

@@ -3,13 +3,19 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
-import { AppDispatch, AppState, getHotels } from "../../store";
+import { AppDispatch, AppState, getHotels, getIdByLocation } from "../../store";
 import HotelCard from "./components/HotelCard";
 import { filterComponents } from "./constants/filterParams";
 import "./style.css";
+import { Button } from "antd";
 
 interface StateProps {
   hotels: any[];
+  locationId: string;
+  checkInDate: string;
+  checkOutDate: string;
+  adultsNum: string;
+  childNum: string;
 }
 interface DispatchProps {
   getHotels: (request: any) => Promise<void>;
@@ -18,7 +24,15 @@ interface HotelsComponentParams {}
 type HotelsComponentProps = StateProps & DispatchProps & HotelsComponentParams;
 
 const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
-  const { hotels, getHotels } = props;
+  const {
+    hotels,
+    locationId,
+    checkInDate,
+    checkOutDate,
+    adultsNum,
+    childNum,
+    getHotels,
+  } = props;
   const [page, setPage] = useState(0);
   const [data, setData] = useState([]);
 
@@ -33,9 +47,10 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
     //   }
     // };
     // fetchData();
-    getHotels("");
+    getHotels({ locationId, checkInDate, checkOutDate, adultsNum, childNum });
   }, []);
   console.log(hotels);
+
   return (
     <div className="hotels">
       <div className="container">
@@ -43,6 +58,7 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
           {filterComponents.map((component) => (
             <div className="filter-block">{component}</div>
           ))}
+          <Button onClick={() => {}}>Применить</Button>
         </div>
         <div className="hotels-cards">
           <div className="hotels-cards-title">
@@ -79,6 +95,11 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
 };
 const mapStateToProps = (state: AppState): StateProps => ({
   hotels: state.hotelsData.hotels,
+  locationId: state.hotelsData.locationId,
+  checkInDate: state.hotelsData.checkInDate,
+  checkOutDate: state.hotelsData.checkOutDate,
+  adultsNum: state.hotelsData.adultsNum,
+  childNum: state.hotelsData.childNum,
 });
 const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
   getHotels: (request) => dispatch(getHotels(request)),
