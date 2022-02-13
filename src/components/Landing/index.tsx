@@ -2,10 +2,13 @@ import "./style.css";
 import { FormHotel } from "./components/FormHotel";
 import PopularTownCard from "./components/PopularTownCard";
 import PopularHotelCard from "./components/PopularHotelCard";
+import AnimationBackground from "./components/animation-background";
 
 const Landing = () => (
   <div className="container">
-    <div className="background"></div>
+    <div className="background">
+      <AnimationBackground />
+    </div>
     <div className="find-hotel">
       <FormHotel />
     </div>
