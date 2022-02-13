@@ -44,7 +44,6 @@ const RegistrationForm = () => {
   const reqisterHandler = async () => {
     try {
       const data = await request("register", "POST", { ...forms });
-      console.log(data);
     } catch (err: any) {
       console.log(err.message);
     }

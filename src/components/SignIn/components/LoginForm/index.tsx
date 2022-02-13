@@ -1,6 +1,6 @@
 import "antd/dist/antd.css";
 import "./style.css";
-import { Form, Input, Button, Checkbox, message } from "antd";
+import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../../context/Auth.Context";
@@ -8,7 +8,7 @@ import { useHttp } from "../../../../hooks/http.hooks";
 
 const LoginForm = () => {
   const auth = useContext(AuthContext);
-  const { loading, error, request } = useHttp();
+  const { loading, request } = useHttp();
   const [forms, setForm] = useState({
     email: "",
     password: "",
@@ -22,13 +22,10 @@ const LoginForm = () => {
     try {
       const data = await request("/login", "POST", { ...forms });
       auth.login(data.token, data.userId);
+      document.location.reload();
     } catch (err: any) {
       console.log("crch", err.message);
     }
-  };
-
-  const onFinish = (values: unknown) => {
-    console.log("Received values of form: ", values);
   };
 
   return (
@@ -36,7 +33,6 @@ const LoginForm = () => {
       name="normal_login"
       className="login-form"
       initialValues={{ remember: true }}
-      onFinish={onFinish}
     >
       <Form.Item
         name="username"
@@ -61,15 +57,6 @@ const LoginForm = () => {
           onChange={changeHandler}
         />
       </Form.Item>
-      {/* <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
-      </Form.Item> */}
 
       <Form.Item>
         <Button
