@@ -4,8 +4,18 @@ import { check, validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
-
 const router = Router();
+
+//get UserDate
+
+router.get("/user/:id", async (req, res) => {  
+ try { 
+   const userData = await User.findById(req.params.id);
+   res.status(200).json(userData);
+ } catch (err:any) {
+   res.status(500).json({message: err.message});
+ }
+})
 
 // /register
 
@@ -41,7 +51,7 @@ router.post(
 
       res.status(201).json({ message: "creating user accounts" });
     } catch (e) {
-      res.status(500).json({ message: "Error. Try again" });
+      res.status(500).json({ message: e });
     }
   }
 );
@@ -56,8 +66,7 @@ router.post(
       .isEmail(),
     check("password", "Please enter a valid password").exists(),
   ],
-  async (req:any, res:any) => {  
-    console.log(req.body);   
+  async (req:any, res:any) => {   
     try {       
       const errors = validationResult(req);
 

@@ -8,9 +8,11 @@ import {
 } from "redux";
 import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { usersReducer } from "./users/reducer";
 
 const rootReducer = combineReducers({
   hotelsData: hotelsReducer,
+  usersData: usersReducer,
 });
 
 export const store = createStore(
