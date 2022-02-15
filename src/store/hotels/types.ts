@@ -24,12 +24,12 @@ interface LoadedCheckOutDateAction {
 
 interface LoadedAdultsNumAction {
   type: HotelsActionsTypes.ADULTSNUM_LOADED;
-  payload: string;
+  payload: number;
 }
 
 interface LoadedChildNumAction {
   type: HotelsActionsTypes.CHILDNUM_LOADED;
-  payload: string;
+  payload: number;
 }
 export enum HotelsActionsTypes {
   HOTELS_FETCH = "HOTELS_FETCH",
@@ -55,6 +55,6 @@ export interface InitialHotelsState {
   locationId: string;
   checkInDate: string;
   checkOutDate: string;
-  adultsNum: string;
-  childNum: string;
+  adultsNum: number;
+  childNum: number;
 }

@@ -30,7 +30,7 @@ const HotelCard = (props: any) => {
       <hr className="card-info-line" />
       <div className="hotel-card-info">
         <Rate
-          style={{ color: "#BC9CFF" }}
+          className="rate-icon"
           allowHalf
           defaultValue={+props.data.review_score / 2}
         />

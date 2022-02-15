@@ -5,8 +5,8 @@ const initialState: InitialHotelsState = {
   locationId: "",
   checkInDate: "",
   checkOutDate: "",
-  adultsNum: "",
-  childNum: "",
+  adultsNum: 0,
+  childNum: 0,
 };
 
 export const hotelsReducer = (

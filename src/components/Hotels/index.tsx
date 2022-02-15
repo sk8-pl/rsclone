@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
-import { AppDispatch, AppState, getHotels, getIdByLocation } from "../../store";
+import { AppDispatch, AppState, getHotels } from "../../store";
 import HotelCard from "./components/HotelCard";
 import { filterComponents } from "./constants/filterParams";
 import "./style.css";
@@ -14,8 +14,8 @@ interface StateProps {
   locationId: string;
   checkInDate: string;
   checkOutDate: string;
-  adultsNum: string;
-  childNum: string;
+  adultsNum: number;
+  childNum: number;
 }
 interface DispatchProps {
   getHotels: (request: any) => Promise<void>;
@@ -34,39 +34,29 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
     getHotels,
   } = props;
   const [page, setPage] = useState(0);
-  const [data, setData] = useState([]);
 
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await fetch("hotels.json");
-    //     const json = await response.json();
-    //     setData(json.result);
-    //   } catch (error) {
-    //     console.log("error", error);
-    //   }
-    // };
-    // fetchData();
     getHotels({ locationId, checkInDate, checkOutDate, adultsNum, childNum });
   }, []);
-  console.log(hotels);
 
   return (
     <div className="hotels">
       <div className="container">
         <div className="hotels-filters">
-          {filterComponents.map((component) => (
-            <div className="filter-block">{component}</div>
+          {filterComponents.map((component, index) => (
+            <div className="filter-block" key={index}>
+              {component}
+            </div>
           ))}
-          <Button onClick={() => {}}>Применить</Button>
+          <Button>Применить</Button>
         </div>
         <div className="hotels-cards">
           <div className="hotels-cards-title">
             Номера, которые мы для вас подобрали
           </div>
           <div className="hotels-cards-container">
-            {hotels.map((val) => {
-              return <HotelCard data={val} />;
+            {hotels.map((val, index) => {
+              return <HotelCard data={val} key={index} />;
             })}
           </div>
           <div className="hotels-pagination">
@@ -74,6 +64,7 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
               <div
                 className={`page ${index === page ? "active-page" : ""}`}
                 onClick={() => setPage(index)}
+                key={index}
               >
                 {value}
               </div>

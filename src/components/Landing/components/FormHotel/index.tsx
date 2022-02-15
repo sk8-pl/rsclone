@@ -1,4 +1,4 @@
-import { DatePicker, Input, Form } from "antd";
+import { Input, Form } from "antd";
 import { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -12,35 +12,26 @@ import {
 import { DateArrive } from "../../../Hotels/components/Dates/DateArrive";
 import { DateLeave } from "../../../Hotels/components/Dates/DateLeave";
 import { Select } from "../../../Hotels/components/Select";
-import { guestSelect } from "../../../Hotels/constants/filterParams";
 import "./style.css";
 
 interface StateProps {
   locationId: string;
 }
 interface DispatchProps {
-  getIdByLocation: (location: any) => Promise<void>;
+  getIdByLocation: (location: string) => Promise<void>;
   getCheckInDate: (checkInDate: string) => Promise<void>;
   getCheckOutDate: (checkOutDate: string) => Promise<void>;
 }
-// interface HotelsComponentParams {}
+
 type FormHotelProps = StateProps & DispatchProps;
 
 const FormHotelComponent: React.FC<FormHotelProps> = (props) => {
+  const { getIdByLocation } = props;
   const [city, setCity] = useState("");
   return (
     <Form>
       <p className="find-hotel__title">Найдём номера под ваши пожелания</p>
       <div className="find-hotel__place">
-        {/* <label htmlFor="place-country" className="label-text">
-          Страна
-        </label>
-        <Form.Item
-          rules={[{ required: true, message: "Пожалуйста, введите страну" }]}
-        >
-          <Input placeholder="Россия" style={{ height: 40 }} />
-        </Form.Item> */}
-
         <label htmlFor="place-town" className="label-text">
           Город
         </label>
@@ -50,7 +41,7 @@ const FormHotelComponent: React.FC<FormHotelProps> = (props) => {
           <Input
             placeholder="Москва"
             name="place-town"
-            style={{ height: 40 }}
+            className="form-hotel-input"
             onChange={(e) => {
               setCity((e.target as HTMLInputElement).value);
             }}
@@ -60,28 +51,9 @@ const FormHotelComponent: React.FC<FormHotelProps> = (props) => {
       <div className="find-hotel__dates flex">
         <div className="find-hotel__dates-arrival">
           <DateArrive />
-          {/* <DatePicker
-            size="large"
-            style={{ width: "266px" }}
-            placeholder="Выбрать дату"
-            onChange={(date, dateString) => {
-              setCheckInDate(dateString);
-            }}
-          /> */}
         </div>
         <div className="find-hotel__dates-departure">
-          {/* <label htmlFor="date-departure" className="label-text">
-            Выезд
-          </label> */}
           <DateLeave />
-          {/* <DatePicker
-            size="large"
-            style={{ width: "266px" }}
-            placeholder="Выбрать дату"
-            onChange={(date, dateString) => {
-              setCheckOutDate(dateString);
-            }}
-          /> */}
         </div>
       </div>
       <div className="find-hotel__guests">
@@ -94,7 +66,7 @@ const FormHotelComponent: React.FC<FormHotelProps> = (props) => {
         className="find-hotel__button"
         to="/hotels"
         onClick={() => {
-          props.getIdByLocation(city);
+          getIdByLocation(city);
         }}
       >
         подобрать номер

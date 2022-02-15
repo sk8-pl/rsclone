@@ -15,7 +15,7 @@ const Profile = () => (
           <Avatar
             size={300}
             icon={<UserOutlined />}
-            style={{ marginBottom: "20px" }}
+            className="user-avatar-default"
           />
           <UploadPhoto />
         </div>

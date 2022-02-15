@@ -15,7 +15,7 @@ const Header = () => (
           <Avatar
             size={42}
             icon={<UserOutlined />}
-            style={{ marginRight: 20 }}
+            className="avatar-default-icon"
           />
         </Link>
 

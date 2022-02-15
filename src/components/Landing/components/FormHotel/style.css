@@ -60,3 +60,6 @@
   display: flex !important;
   flex-direction: column !important;
 }
+.form-hotel-input {
+  height: 40px;
+}

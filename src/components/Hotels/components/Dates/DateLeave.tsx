@@ -23,7 +23,7 @@ export const DateLeaveComponent: React.FC<DateLeaveProps> = (props) => (
       )}
       format="YYYY-MM-DD"
       size="large"
-      style={{ width: "266px" }}
+      className="date-block"
       placeholder="Выбрать дату"
       disabledDate={disabledDate}
       onChange={(date, dateString) => {

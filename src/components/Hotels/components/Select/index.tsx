@@ -6,71 +6,54 @@ import {
   getAdultsNum,
   getChildNum,
 } from "../../../../store";
-
-interface StateProps {
-  adultsNum: string;
-  childNum: string;
-}
-interface DispatchProps {
-  getAdultsNum: (adultsNum: string) => Promise<void>;
-  getChildNum: (childNum: string) => Promise<void>;
-}
-// interface HotelsComponentParams {}
-type SelectComponentProps = StateProps & DispatchProps;
-
-const createSelectText = (values: number[], options: string[]) =>
-  `${values
-    .reduce((acc, val, i) => `${acc} ${val} ${options[i]}, `, "")
-    .slice(0, -1)}`;
+import {
+  MAX_COUNT,
+  MIN_COUNT,
+  selectOptions,
+} from "./constants/selectConstants";
+import { createSelectText } from "./helpers/createSelectText";
+import { DispatchProps, StateProps } from "./interfaces/propsInterfaces";
+import { SelectComponentProps } from "./types/propsTypes";
 
 export const SelectComponent: React.FC<SelectComponentProps> = (props) => {
-  const [select, setSelect] = useState(false);
-  const [adultsNum, setAdultsNum] = useState(+props.adultsNum);
-  const [childNum, setChildNum] = useState(+props.childNum);
-  const options = ["взрослые", "дети"];
+  const { adultsNum, childNum } = props;
+  const [selectState, setSelectState] = useState<boolean>(false);
+
   return (
     <>
       <div className="filter-info">
         <span className="filter-info-text">
-          {createSelectText([+adultsNum, +childNum], options)}
+          {createSelectText([adultsNum, childNum], selectOptions)}
         </span>
         <button
           className="change-filter-btn change-filter-person"
-          onClick={() => setSelect(!select)}
+          onClick={() => setSelectState(!selectState)}
         ></button>
       </div>
-      <div className={`comfortables-select ${!select ? "hidden" : ""}`}>
-        {options.map((value, index) => (
-          <div className="comfortables-option">
+      <div className={`comfortables-select ${!selectState ? "hidden" : ""}`}>
+        {selectOptions.map((value, index) => (
+          <div className="comfortables-option" key={index}>
             <span className="comfortable-name">{value}</span>
             <div className="comf-counter">
               <div
                 className="comf-btn less-btn"
                 onClick={() => {
-                  const arr = [+adultsNum, +childNum].map((option, i) => {
-                    if (i === index && option > 0) return option - 1;
-                    return option;
-                  });
-                  setAdultsNum(arr[0]);
-                  setChildNum(arr[1]);
-                  props.getAdultsNum(`${arr[0]}`);
-                  props.getChildNum(`${arr[1]}`);
+                  if (index && childNum > MIN_COUNT)
+                    props.getChildNum(childNum - 1);
+                  if (adultsNum > MIN_COUNT && !index)
+                    props.getAdultsNum(adultsNum - 1);
                 }}
               >
                 -
               </div>
-              <div className="comf-count">{[+adultsNum, +childNum][index]}</div>
+              <div className="comf-count">{[adultsNum, childNum][index]}</div>
               <div
                 className="comf-btn more-btn"
                 onClick={() => {
-                  const arr = [+adultsNum, +childNum].map((option, i) => {
-                    if (i === index && option < 10) return option + 1;
-                    return option;
-                  });
-                  setAdultsNum(arr[0]);
-                  setChildNum(arr[1]);
-                  props.getAdultsNum(`${arr[0]}`);
-                  props.getChildNum(`${arr[1]}`);
+                  if (index && childNum < MAX_COUNT)
+                    props.getChildNum(childNum + 1);
+                  if (adultsNum < MAX_COUNT && !index)
+                    props.getAdultsNum(adultsNum + 1);
                 }}
               >
                 +
