@@ -1,55 +1,59 @@
 import { useState } from "react";
+import { connect } from "react-redux";
+import {
+  AppDispatch,
+  AppState,
+  getAdultsNum,
+  getChildNum,
+} from "../../../../store";
+import {
+  MAX_COUNT,
+  MIN_COUNT,
+  selectOptions,
+} from "./constants/selectConstants";
+import { createSelectText } from "./helpers/createSelectText";
+import { DispatchProps, StateProps } from "./interfaces/propsInterfaces";
+import { SelectComponentProps } from "./types/propsTypes";
 
-interface ISelect {
-  options: string[];
-}
+export const SelectComponent: React.FC<SelectComponentProps> = (props) => {
+  const { adultsNum, childNum } = props;
+  const [selectState, setSelectState] = useState<boolean>(false);
 
-const createSelectText = (values: number[], options: string[]) => {
-  return `${values
-    .reduce((acc, val, i) => `${acc} ${val} ${options[i]}, `, "")
-    .slice(0, 25)}...`;
-};
-
-export const Select = ({ options }: ISelect) => {
-  const [select, setSelect] = useState(false);
-  const [optionsValues, setOptionsValues] = useState([0, 0, 0]);
   return (
     <>
       <div className="filter-info">
         <span className="filter-info-text">
-          {createSelectText(optionsValues, options)}
+          {createSelectText([adultsNum, childNum], selectOptions)}
         </span>
         <button
           className="change-filter-btn change-filter-person"
-          onClick={() => setSelect(!select)}
+          onClick={() => setSelectState(!selectState)}
         ></button>
       </div>
-      <div className={`comfortables-select ${!select ? "hidden" : ""}`}>
-        {options.map((value, index) => (
-          <div className="comfortables-option">
+      <div className={`comfortables-select ${!selectState ? "hidden" : ""}`}>
+        {selectOptions.map((value, index) => (
+          <div className="comfortables-option" key={index}>
             <span className="comfortable-name">{value}</span>
             <div className="comf-counter">
               <div
                 className="comf-btn less-btn"
                 onClick={() => {
-                  const arr = optionsValues.map((option, i) => {
-                    if (i === index && option > 0) return option - 1;
-                    return option;
-                  });
-                  setOptionsValues(arr);
+                  if (index && childNum > MIN_COUNT)
+                    props.getChildNum(childNum - 1);
+                  if (adultsNum > MIN_COUNT && !index)
+                    props.getAdultsNum(adultsNum - 1);
                 }}
               >
                 -
               </div>
-              <div className="comf-count">{optionsValues[index]}</div>
+              <div className="comf-count">{[adultsNum, childNum][index]}</div>
               <div
                 className="comf-btn more-btn"
                 onClick={() => {
-                  const arr = optionsValues.map((option, i) => {
-                    if (i === index && option < 10) return option + 1;
-                    return option;
-                  });
-                  setOptionsValues(arr);
+                  if (index && childNum < MAX_COUNT)
+                    props.getChildNum(childNum + 1);
+                  if (adultsNum < MAX_COUNT && !index)
+                    props.getAdultsNum(adultsNum + 1);
                 }}
               >
                 +
@@ -61,3 +65,17 @@ export const Select = ({ options }: ISelect) => {
     </>
   );
 };
+
+const mapStateToProps = (state: AppState): StateProps => ({
+  adultsNum: state.hotelsData.adultsNum,
+  childNum: state.hotelsData.childNum,
+});
+const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
+  getAdultsNum: (adultsNum) => dispatch(getAdultsNum(adultsNum)),
+  getChildNum: (childNum) => dispatch(getChildNum(childNum)),
+});
+
+export const Select = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectComponent);

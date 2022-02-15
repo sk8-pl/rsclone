@@ -117,3 +117,6 @@
   display: flex;
    justify-content: space-evenly;
 }
+.user-avatar-default {
+  margin-bottom: 20px !important;
+}

@@ -13,7 +13,4 @@ export const filterComponents = [
   <Rules />,
   <Comfortables />,
 ];
-
-export const roomSelect = ["спальни", "кровати", "ванные комнаты"];
-
-export const guestSelect = ["взрослые", "дети", "младенцы"];
+export const guestSelect = ["взрослые", "дети"];

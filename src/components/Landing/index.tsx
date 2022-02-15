@@ -1,5 +1,5 @@
 import "./style.css";
-import FormHotel from "./components/FormHotel";
+import { FormHotel } from "./components/FormHotel";
 import PopularTownCard from "./components/PopularTownCard";
 import PopularHotelCard from "./components/PopularHotelCard";
 
