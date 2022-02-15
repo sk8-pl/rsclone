@@ -27,6 +27,7 @@
   font-weight: 500;
   font-size: 18px;
 }
+
 .header-btns {
   display: flex;
 }
@@ -58,3 +59,6 @@
 .avatar-default-icon {
   margin-right: 20px !important;
 }
+
+
+

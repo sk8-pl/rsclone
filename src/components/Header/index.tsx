@@ -1,33 +1,43 @@
-import Avatar from "antd/lib/avatar/avatar";
-import { UserOutlined } from "@ant-design/icons";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { HeaderBtn } from "./components/HeaderBtn";
+import { connect } from "react-redux";
+import { AppDispatch, AppState } from "../../store";
+import { getUserData } from "../../store/users/actions";
+import { useEffect } from "react";
 
-const Header = () => (
-  <div className="header">
-    <div className="container">
-      <div className="header-logo">
-        <div className="logo-img"></div>
-        <h1 className="logo-text">SkyHotel</h1>
-      </div>
-      <div className="header-btns">
-        <Link to="/profile">
-          <Avatar
-            size={42}
-            icon={<UserOutlined />}
-            className="avatar-default-icon"
-          />
-        </Link>
+interface StateProps {
+  user: any;
+}
+interface DispatchProps {
+  getUserData: () => Promise<void>;
+}
 
-        <Link className="header-btn sign-in" to="/sign-in">
-          войти
-        </Link>
-        <Link className="header-btn sign-up" to="/registration">
-          зарегистрироваться
-        </Link>
+type HeaderProps = StateProps & DispatchProps;
+
+const Header: React.FC<HeaderProps> = (props) => {
+  const { user, getUserData: getData } = props;
+  useEffect(() => {
+    getData();
+  }, [getData]);
+
+  return (
+    <div className="header">
+      <div className="container">
+        <div className="header-logo">
+          <div className="logo-img"></div>
+          <h1 className="logo-text">SkyHotel</h1>
+        </div>
+        <HeaderBtn data={props.user} />
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-export default Header;
+const mapStateToProps = (state: AppState): StateProps => ({
+  user: state.usersData.user,
+});
+const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
+  getUserData: () => dispatch(getUserData()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -19,6 +19,15 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const User_1 = __importDefault(require("../models/User"));
 const router = (0, express_1.Router)();
+router.get("/user/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userData = yield User_1.default.findById(req.params.id);
+        res.status(200).json(userData);
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}));
 router.post("/register", [
     (0, express_validator_1.check)("email", "Error in email").isEmail(),
     (0, express_validator_1.check)("password", "Error in password").isLength({ min: 6 }),
@@ -30,18 +39,18 @@ router.post("/register", [
                 .status(400)
                 .json({ errors: errors.array(), massage: "Error in data" });
         }
-        const { email, password } = req.body;
+        const { email, password, name, phone, surname } = req.body;
         const candidate = yield User_1.default.findOne({ email });
         if (candidate) {
             return res.status(400).json({ massage: "Person exist!" });
         }
         const hashedPassword = yield bcrypt_1.default.hash(password, 12);
-        const user = new User_1.default({ email, password: hashedPassword });
+        const user = new User_1.default({ email, password: hashedPassword, name, phone, surname });
         yield user.save();
         res.status(201).json({ message: "creating user accounts" });
     }
     catch (e) {
-        res.status(500).json({ message: "Error. Try again" });
+        res.status(500).json({ message: e });
     }
 }));
 router.post("/login", [
@@ -50,7 +59,6 @@ router.post("/login", [
         .isEmail(),
     (0, express_validator_1.check)("password", "Please enter a valid password").exists(),
 ], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
     try {
         const errors = (0, express_validator_1.validationResult)(req);
         if (!errors.isEmpty()) {

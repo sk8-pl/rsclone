@@ -4,8 +4,18 @@ import { check, validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
-
 const router = Router();
+
+//get UserDate
+
+router.get("/user/:id", async (req, res) => {  
+ try { 
+   const userData = await User.findById(req.params.id);
+   res.status(200).json(userData);
+ } catch (err:any) {
+   res.status(500).json({message: err.message});
+ }
+})
 
 // /register
 
@@ -25,7 +35,7 @@ router.post(
           .json({ errors: errors.array(), massage: "Error in data" });
       }
 
-      const { email, password } = req.body;
+      const { email, password, name, phone, surname } = req.body;
 
       const candidate = await User.findOne({ email });
 
@@ -35,13 +45,13 @@ router.post(
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      const user = new User({ email, password: hashedPassword });
+      const user = new User({ email, password: hashedPassword, name, phone, surname });
 
       await user.save();
 
       res.status(201).json({ message: "creating user accounts" });
     } catch (e) {
-      res.status(500).json({ message: "Error. Try again" });
+      res.status(500).json({ message: e });
     }
   }
 );
@@ -56,8 +66,7 @@ router.post(
       .isEmail(),
     check("password", "Please enter a valid password").exists(),
   ],
-  async (req:any, res:any) => {  
-    console.log(req.body);   
+  async (req:any, res:any) => {   
     try {       
       const errors = validationResult(req);
 
