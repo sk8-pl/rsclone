@@ -32,5 +32,7 @@ module.exports = {
     ],
     "@typescript-eslint/default-param-last": ["error"],
     "import/extensions": "never" | "always" | "ignorePackages",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["off"],
   },
 };
