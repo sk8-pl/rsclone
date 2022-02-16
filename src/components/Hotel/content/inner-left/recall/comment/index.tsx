@@ -2,7 +2,7 @@ import "./style.css";
 import { Comment, List } from "antd";
 import { useState, useEffect } from "react";
 
-const Commentarys = () => {
+const Commentary = () => {
   const [data, setData] = useState([
     {
       review_id: 1231231,
@@ -16,7 +16,6 @@ const Commentarys = () => {
       try {
         const response = await fetch("reviews-hotel.json");
         const json = await response.json();
-        console.log(json.result);
         json.result.map((e: { avatar: string }) => {
           e.avatar = "https://joeschmoe.io/api/v1/random";
         });
@@ -47,4 +46,4 @@ const Commentarys = () => {
   );
 };
 
-export default Commentarys;
+export default Commentary;

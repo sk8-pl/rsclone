@@ -12,9 +12,7 @@ const Hotel = () => {
       try {
         const response = await fetch("data-hotels.json");
         const json = await response.json();
-        console.log(json.result[4]);
         setData(json.result[4]);
-        console.log(json.result[4].hotel_id);
         setIdHotel(json.result[4].hotel_id);
       } catch (error) {
         console.log("error", error);
