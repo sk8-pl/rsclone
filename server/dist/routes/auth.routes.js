@@ -19,15 +19,6 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const User_1 = __importDefault(require("../models/User"));
 const router = (0, express_1.Router)();
-router.get("/user/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const userData = yield User_1.default.findById(req.params.id);
-        res.status(200).json(userData);
-    }
-    catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-}));
 router.post("/register", [
     (0, express_validator_1.check)("email", "Error in email").isEmail(),
     (0, express_validator_1.check)("password", "Error in password").isLength({ min: 6 }),

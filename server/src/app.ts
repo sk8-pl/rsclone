@@ -1,20 +1,27 @@
 import express from "express";
+import cors from "cors";
 import config from "config";
 import mongoose from "mongoose";
-import router from "../routes/auth.routes";
+import useRouter from "../routes/auth.routes";
+import userRouter from "../routes/user.roures";
+import morgan from "morgan";
 
 const app = express();
 const PORT = config.get("port") || 8080;
 
+app.use(cors());
+app.use(morgan("tiny"));
 app.use(express.json());
 
-app.use("/", router);
+app.use("/user", userRouter);
+app.use("/", useRouter);
+
 
 async function start() {
   try {
     await mongoose.connect(config.get("mongoUri"));    
     app.get("/", (_req, res) => {
-      res.send(`Hello, it"s me! ${router} Hi`);
+      res.send(`Hello, it"s me! ${useRouter} Hi`);
     });
     app.listen(PORT, () => {
       return console.log(`server is listening on ${PORT}`);

@@ -1,4 +1,5 @@
 export interface GetUserDataResponse {
+  _id: string;
   name?: string;
   surname?: string;
   phone?: string;
