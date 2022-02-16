@@ -28,7 +28,7 @@ const tailFormItemLayout = {
 };
 
 const RegistrationForm = () => {
-  const { loading, error, request } = useHttp();
+  const { loading, request } = useHttp();
   const [forms, setForm] = useState({
     email: "",
     password: "",
@@ -37,15 +37,17 @@ const RegistrationForm = () => {
     phone: "",
   });
 
-  const changeHandler = (event: { target: { name: any; value: any } }) => {
+  const changeHandler = (event: {
+    target: { name: string; value: string };
+  }) => {
     setForm({ ...forms, [event.target.name]: event.target.value });
   };
 
   const reqisterHandler = async () => {
     try {
-      const data = await request("register", "POST", { ...forms });
-    } catch (err: any) {
-      console.log(err.message);
+      await request("register", "POST", { ...forms });
+    } catch (error) {
+      console.log(error);
     }
   };
 

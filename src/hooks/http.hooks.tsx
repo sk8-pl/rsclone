@@ -1,11 +1,17 @@
 import { useState, useCallback } from "react";
 
+enum Method {
+  Get = "GET",
+  Post = "POST",
+  Patch = "PATCH",
+}
+
 export const useHttp = () => {
   const [loading, setLoad] = useState(false);
   const [error, setError] = useState(null);
 
   const request = useCallback(
-    async (url: any, method = "GET", body = null, headers = {}) => {
+    async (url: string, method = Method, body = null, headers = {}) => {
       setLoad(true);
       try {
         if (body) {
@@ -17,13 +23,11 @@ export const useHttp = () => {
         if (!responce.ok) {
           throw new Error(data.message || "Unknown error in hook -> request()");
         }
-
         setLoad(false);
         return data;
-      } catch (e: any) {
+      } catch (error: any) {
         setLoad(false);
-        setError(e.message);
-        throw e;
+        throw new Error(error.message);
       }
     },
     []
