@@ -1,19 +1,73 @@
 import "./style.css";
-import { Avatar, Button, Card, Rate } from "antd";
+import { Avatar, Button, Form, Input, Modal } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { BookingCard } from "./components/BookingCard";
-import { changeUserInput } from "./helpers/changeUserInput";
-import { userInfo, userInfoTitles } from "./constants/userInfo";
 import { UploadPhoto } from "./components/UploadPhoto";
 import { FavoriteHotelCard } from "./components/FavoriteHotelCard";
 import { useSelector } from "react-redux";
 import { AppState } from "../../store";
 import { GetUserDataResponse } from "../../api/getUserData.api";
+import { useState } from "react";
+import { useHttp } from "../../hooks/http.hooks";
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 8 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 16 },
+  },
+};
 
 const Profile = () => {
+  const { request } = useHttp();
   const user = useSelector<AppState, GetUserDataResponse | null>(
     (state) => state.usersData.user
   );
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const [forms, setForm] = useState({
+    email: user?.email,
+    name: user?.name,
+    surname: user?.surname,
+    phone: user?.phone,
+  });
+
+  const changeHandler = (event: {
+    target: { name: string; value: string };
+  }) => {
+    setForm({ ...forms, [event.target.name]: event.target.value });
+  };
+
+  const changeUserDataHandler = async () => {
+    try {
+      const url = `/user/${user?._id}`;
+      await request(url, "PATCH", { ...forms });
+      setIsModalVisible(false);
+      document.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const changeImageUserHandler = async () => {
+    try {
+    } catch (error) {}
+  };
+
+  const [form] = Form.useForm();
+
   return (
     <div className="profile">
       <div className="container">
@@ -28,26 +82,126 @@ const Profile = () => {
           </div>
           <div className="user-info">
             <div className="greeting">
-              Здравствуйте, {user?.name || "User"}! Рады видеть вас!
+              Здравствуйте, {user?.name}! Рады видеть вас!
             </div>
             <div className="wrapper-info">
-              <span className="info-title">
-                Редактировать информацию о себе:
-              </span>
-              {userInfoTitles.map((val, index) => (
-                <div className="info-block">
-                  <span className="info-name">{val}</span>
-                  <input
-                    type="text"
-                    className="info-input"
-                    disabled
-                    placeholder={userInfo[index]}
-                  />
-                  <Button type="primary" onClick={changeUserInput}>
-                    Изменить
-                  </Button>
-                </div>
-              ))}
+              <div className="info-block">
+                <span className="info-name">Имя</span>
+                <input
+                  type="text"
+                  className="info-input"
+                  disabled
+                  placeholder={user?.name}
+                />
+              </div>
+              <div className="info-block">
+                <span className="info-name">Фамилия</span>
+                <input
+                  type="text"
+                  className="info-input"
+                  disabled
+                  placeholder={user?.surname}
+                />
+              </div>
+              <div className="info-block">
+                <span className="info-name">Номер телефона</span>
+                <input
+                  type="text"
+                  className="info-input"
+                  disabled
+                  placeholder={user?.phone}
+                />
+              </div>
+              <div className="info-block">
+                <span className="info-name">E-mail</span>
+                <input
+                  type="text"
+                  className="info-input"
+                  disabled
+                  placeholder={user?.email}
+                />
+              </div>
+              <Button type="primary" className="change-btn" onClick={showModal}>
+                Изменить
+              </Button>
+              <Modal
+                title="Редактировать данные"
+                visible={isModalVisible}
+                onOk={changeUserDataHandler}
+                onCancel={handleCancel}
+              >
+                <Form
+                  {...formItemLayout}
+                  form={form}
+                  name="changeUserData"
+                  className="registration__form"
+                  scrollToFirstError
+                >
+                  <Form.Item
+                    name="name"
+                    label="Имя"
+                    rules={[
+                      {
+                        message: "Пожалуйста, введите свое имя!",
+                        whitespace: true,
+                      },
+                    ]}
+                  >
+                    <Input
+                      name="name"
+                      placeholder="Введите имя"
+                      onChange={changeHandler}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    name="surname"
+                    label="Фамилия"
+                    rules={[
+                      {
+                        message: "Пожалуйста, введите свою фамиилю!",
+                        whitespace: true,
+                      },
+                    ]}
+                  >
+                    <Input
+                      name="surname"
+                      placeholder="Введите фамилию"
+                      onChange={changeHandler}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    name="email"
+                    label="E-mail"
+                    rules={[
+                      {
+                        type: "email",
+                        message: "Некорректный E-mail!",
+                      },
+                      {
+                        message: "Введите E-mail!",
+                      },
+                    ]}
+                  >
+                    <Input
+                      name="email"
+                      placeholder="Введите E-mail"
+                      onChange={changeHandler}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    name="phone"
+                    label="Номер телефона"
+                    rules={[{ message: "Введите номер телефона!" }]}
+                  >
+                    <Input
+                      name="phone"
+                      placeholder="Введите номер телефона"
+                      style={{ width: "100%" }}
+                      onChange={changeHandler}
+                    />
+                  </Form.Item>
+                </Form>
+              </Modal>
             </div>
           </div>
         </div>

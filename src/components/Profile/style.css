@@ -34,6 +34,7 @@
 }
 .info-name {
   width: 150px;
+  font-weight:800;
 }
 .info-input {
   width: 350px;
@@ -80,7 +81,6 @@
   flex-direction: column;
   margin-left: -100px;
 }
-
 .hotel-info {
   font-size: 18px;
 }
@@ -119,4 +119,14 @@
 }
 .user-avatar-default {
   margin-bottom: 20px !important;
+}
+.change-btn{
+  float: right;
+  background-color: rgb(175, 174, 174) !important;
+  border: 1px solid #424242 !important;
+  transition: background-color .5s ease !important;
+}
+
+.change-btn:hover{
+  background-color: rgb(78, 67, 107) !important;
 }

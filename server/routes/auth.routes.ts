@@ -6,17 +6,6 @@ import jwt from "jsonwebtoken";
 import User from "../models/User";
 const router = Router();
 
-//get UserDate
-
-router.get("/user/:id", async (req, res) => {  
- try { 
-   const userData = await User.findById(req.params.id);
-   res.status(200).json(userData);
- } catch (err:any) {
-   res.status(500).json({message: err.message});
- }
-})
-
 // /register
 
 router.post(
