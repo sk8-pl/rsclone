@@ -1,15 +1,15 @@
-import Commentarys from "./comment";
+import Commentary from "./comment";
 import "./style.css";
 
-const Recall = () => {
+const Reviews = () => {
   return (
     <div className="recall">
       <div className="recall-tittle">
         <h3>Отзывы посетителей номера</h3>
       </div>
-      <Commentarys />
+      <Commentary />
     </div>
   );
 };
 
-export default Recall;
+export default Reviews;

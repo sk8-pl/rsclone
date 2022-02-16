@@ -1,30 +1,13 @@
 import "./style.css";
 import React, { useState } from "react";
 import { Form, Select, DatePicker, Button } from "antd";
+import { tailFormItemLayout } from "../../../constants/tailForm";
+import { rangeConfig } from "../../../constants/tailForm";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 type LayoutType = Parameters<typeof Form>[0]["layout"];
-
-const rangeConfig = {
-  rules: [
-    { type: "array" as const, required: true, message: "Please select time!" },
-  ],
-};
-
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
 
 const FormBooking = () => {
   const [form] = Form.useForm();

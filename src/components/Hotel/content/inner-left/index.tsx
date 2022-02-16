@@ -1,4 +1,4 @@
-import Recall from "./recall";
+import Reviews from "./recall";
 import RoomDescription from "./room-description";
 import RoomRating from "./room-rating";
 import Worth from "./room-worth";
@@ -11,7 +11,7 @@ const InnerLeft = (props: any) => {
         <Worth />
         <RoomRating score={props.score} scoreText={props.scoreText} />
       </div>
-      <Recall />
+      <Reviews />
       <RoomDescription />
     </div>
   );

@@ -1,6 +1,7 @@
 import { Tag, Divider } from "antd";
 import "./style.css";
 import { useState, useEffect } from "react";
+import { colors } from "../../../../constants/colors-tags";
 
 const TagsWorth = () => {
   const [dataTags, setData] = useState([
@@ -8,20 +9,6 @@ const TagsWorth = () => {
       facility_name: "Питание и напитки",
     },
   ]);
-
-  const colors = [
-    "magenta",
-    "red",
-    "volcano",
-    "orange",
-    "gold",
-    "lime",
-    "green",
-    "cyan",
-    "blue",
-    "geekblue",
-    "purple",
-  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +24,7 @@ const TagsWorth = () => {
   }, []);
 
   const result = dataTags.map((obj, i) => {
-    const numColor = i > 10 ? i - 10 : i;
+    const numColor = i > colors.length ? i - colors.length : i;
     return <Tag color={colors[numColor]}>{obj.facility_name}</Tag>;
   });
 
