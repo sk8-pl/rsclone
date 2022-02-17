@@ -4,6 +4,7 @@ import config from "config";
 import mongoose from "mongoose";
 import useRouter from "../routes/auth.routes";
 import userRouter from "../routes/user.roures";
+import citiesRouter from "../routes/cities.roures";
 import morgan from "morgan";
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(morgan("tiny"));
 app.use(express.json());
 
 app.use("/user", userRouter);
+app.use("/cities", citiesRouter);
 app.use("/", useRouter);
 
 

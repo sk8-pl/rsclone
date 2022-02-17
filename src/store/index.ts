@@ -9,10 +9,12 @@ import {
 import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { usersReducer } from "./users/reducer";
+import { citiesReducer } from "./cities/reducer";
 
 const rootReducer = combineReducers({
   hotelsData: hotelsReducer,
   usersData: usersReducer,
+  citiesData: citiesReducer,
 });
 
 export const store = createStore(
