@@ -38,5 +38,21 @@ userRouter.patch("/:id", (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).json({ message: err.message });
     }
 }));
+userRouter.post("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const favoriteHotelData = yield User_1.default.find({ favoriteHotels: "123" });
+        if (favoriteHotelData) {
+            User_1.default.updateOne({ _id: req.params.id }, { $pop: { favoriteHotels: "123" } });
+        }
+        else {
+            User_1.default.updateOne({ _id: req.params.id }, { $push: { favoriteHotels: "123" } });
+        }
+        res.status(404).json({ message: "user is not found" });
+        res.status(200).json(favoriteHotelData);
+    }
+    catch (e) {
+        res.status(500).json({ message: e.message });
+    }
+}));
 exports.default = userRouter;
 //# sourceMappingURL=user.roures.js.map

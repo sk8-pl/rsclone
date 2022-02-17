@@ -32,4 +32,21 @@ userRouter.patch("/:id", async (req, res) => {
    }
 });
 
+// add/remove favorite hotels
+
+userRouter.post("/:id", async (req, res) => {
+  try {
+    const favoriteHotelData = await User.find({favoriteHotels: "123"});//add idHotels
+    if(favoriteHotelData){
+     User.updateOne({_id: req.params.id}, {$pop: {favoriteHotels: "123"}}) //add idHotels
+    } else{
+      User.updateOne({_id: req.params.id}, {$push: {favoriteHotels: "123"}}) //add idHotels
+    }
+    res.status(404).json({message: "user is not found"});    
+    res.status(200).json(favoriteHotelData);
+  } catch (e:any) {
+    res.status(500).json({message: e.message});
+  }
+})
+
 export default userRouter;

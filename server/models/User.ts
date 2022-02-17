@@ -6,6 +6,7 @@ const schema = new Schema({
   name: {type: String, required: true},
   surname: {type: String},
   phone: {type: String},
+  favoriteHotels: [{type: String}],
   links: [{type: Types.ObjectId, ref:'Link'}]
 })
 
