@@ -15,20 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Cities_1 = __importDefault(require("../models/Cities"));
 const citiesRouter = (0, express_1.Router)();
-citiesRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { city, country, image } = req.body;
-        const newCities = new Cities_1.default({ city, country, image });
-        yield newCities.save();
-        res.status(201).json({ message: "added cities" });
-    }
-    catch (e) {
-        res.status(500).json({ message: e });
-    }
-}));
 citiesRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const citiesData = yield Cities_1.default.aggregate([{ $sample: { size: 5 } }]);
+        if (!citiesData) {
+            res.status(404).json({ message: "Cities not found" });
+        }
         res.status(200).json(citiesData);
     }
     catch (err) {

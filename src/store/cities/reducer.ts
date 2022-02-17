@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/default-param-last */
 import { InitialCitiesState, CitiesActions, CitiesActionsTypes } from "./types";
 
 const initialState: InitialCitiesState = {
@@ -5,7 +6,6 @@ const initialState: InitialCitiesState = {
 };
 
 export const citiesReducer = (
-  // eslint-disable-next-line @typescript-eslint/default-param-last
   state = initialState,
   action: CitiesActions
 ): InitialCitiesState => {
