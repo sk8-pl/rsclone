@@ -1,26 +1,49 @@
 import "./style.css";
+import { Comment, List } from "antd";
+import { useState, useEffect } from "react";
 
-const Comment = () => {
+const Commentary = () => {
+  const [data, setData] = useState([
+    {
+      review_id: 1231231,
+      pros: "qweqwe",
+      avatar: "https://joeschmoe.io/api/v1/random",
+    },
+  ]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("reviews-hotel.json");
+        const json = await response.json();
+        json.result.map((e: { avatar: string }) => {
+          e.avatar = "https://joeschmoe.io/api/v1/random";
+        });
+        setData(json.result);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="comment">
-      <div className="comment-author">
-        <div className="icon-author"></div>
-        <div className="name-author">
-          <h4 className="name-author_comment">Имя Фамилия</h4>
-          <div className="long-ago">0 дней назад</div>
-        </div>
-      </div>
-      <div className="comment-text">
-        <div className="like-amount">&#9829; 0 </div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eos,
-          consectetur quo quas pariatur cupiditate facere voluptate maiores quia
-          commodi fugiat accusantium praesentium blanditiis qui iure numquam
-          delectus culpa? Iure!
-        </p>
-      </div>
-    </div>
+    <List
+      className="comment-list"
+      header={`Последние ${data.length} комментария`}
+      itemLayout="horizontal"
+      dataSource={data}
+      renderItem={(item) => (
+        <li>
+          <Comment
+            author={item.review_id}
+            avatar={item.avatar}
+            content={item.pros}
+          />
+        </li>
+      )}
+    />
   );
 };
 
-export default Comment;
+export default Commentary;
