@@ -31,8 +31,6 @@
   animation: sunRotating 10s linear infinite;
 }
 
-
-
 .night-day-mode {
   animation: changeCycleTwo 30s linear infinite;
 }

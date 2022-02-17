@@ -4,45 +4,49 @@ import PopularTownCard from "./components/PopularTownCard";
 import PopularHotelCard from "./components/PopularHotelCard";
 import AnimationBackground from "./components/animation-background";
 
-const Landing = () => (
-  <div className="container">
-    <div className="background">
-      <AnimationBackground />
-    </div>
-    <div className="find-hotel">
-      <FormHotel />
-    </div>
-    <div className="popular-city">
-      <div className="popular-city__upper flex">
-        <div className="popular-city__card upper-block">
-          <PopularTownCard />
+const Landing = () => {
+  return (
+    <div className="container">
+      <div className="background">
+        <AnimationBackground />
+      </div>
+      <div className="find-hotel">
+        <FormHotel />
+      </div>
+      <div className="popular-city">
+        <div className="popular-city__upper flex">
+          <div className="popular-city__card upper-block">
+            <PopularTownCard />
+          </div>
+          <div className="popular-city__card upper-block">
+            <PopularTownCard />
+          </div>
         </div>
-        <div className="popular-city__card upper-block">
-          <PopularTownCard />
+        <div className="popular-city__lower flex">
+          <div className="popular-city__card lower-block">
+            <PopularTownCard />
+          </div>
+          <div className="popular-city__card lower-block">
+            <PopularTownCard />
+          </div>
+          <div className="popular-city__card lower-block">
+            <PopularTownCard />
+          </div>
         </div>
       </div>
-      <div className="popular-city__lower flex">
-        <div className="popular-city__card lower-block">
-          <PopularTownCard />
-        </div>
-        <div className="popular-city__card lower-block">
-          <PopularTownCard />
-        </div>
-        <div className="popular-city__card lower-block">
-          <PopularTownCard />
+      <div className="popular-hotels">
+        <h2 className="popular-hotels__title">
+          Отели, которые нравятся гостям
+        </h2>
+        <div className="popular-hotels-cards flex">
+          <PopularHotelCard />
+          <PopularHotelCard />
+          <PopularHotelCard />
+          <PopularHotelCard />
         </div>
       </div>
     </div>
-    <div className="popular-hotels">
-      <h2 className="popular-hotels__title">Отели, которые нравятся гостям</h2>
-      <div className="popular-hotels-cards flex">
-        <PopularHotelCard />
-        <PopularHotelCard />
-        <PopularHotelCard />
-        <PopularHotelCard />
-      </div>
-    </div>
-  </div>
-);
+  );
+};
 
 export default Landing;
