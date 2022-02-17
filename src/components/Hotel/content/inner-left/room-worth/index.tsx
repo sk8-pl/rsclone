@@ -1,10 +1,12 @@
+import TagsWorth from "./room-tags";
 import "./style.css";
 
 const Worth = () => {
   return (
     <div className="worth">
-      <h3>Сведения о номере</h3>
-      <div className="plug-worth"></div>
+      <div className="plug-worth">
+        <TagsWorth />
+      </div>
     </div>
   );
 };
