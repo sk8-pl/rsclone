@@ -1,8 +1,8 @@
 import "./style.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Form, Select, DatePicker, Button } from "antd";
-import { tailFormItemLayout } from "../../../constants/tailForm";
-import { rangeConfig } from "../../../constants/tailForm";
+import { tailFormItemLayout } from "../../../../constants/tailForm";
+import { rangeConfig } from "../../../../constants/tailForm";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -25,6 +25,11 @@ const FormBooking = () => {
         }
       : null;
 
+  const priceDay = 999.9;
+  const valueDays = 4;
+  const discount = 300;
+  const extraService = 300;
+
   return (
     <Form
       {...formItemLayout}
@@ -35,7 +40,7 @@ const FormBooking = () => {
     >
       <div className="form-header">
         <div className="form-header_left">№123123</div>
-        <div className="form-header_right">9990₽ в сутки</div>
+        <div className="form-header_right">{priceDay}₽ в сутки</div>
       </div>
 
       <Form.Item name="range-picker" label="RangePicker" {...rangeConfig}>
@@ -52,6 +57,40 @@ const FormBooking = () => {
           <Option value="2">2 гостя</Option>
           <Option value="3">3 гостя</Option>
         </Select>
+      </Form.Item>
+
+      <Form.Item>
+        <div className="price-container">
+          <div className="price">
+            {priceDay}₽ x {valueDays} суток
+          </div>
+          <div className="price-total">{priceDay * valueDays}₽</div>
+        </div>
+      </Form.Item>
+
+      <Form.Item>
+        <div className="price-container">
+          <div className="price-discount">
+            Сбор за услуги: скидка {discount}₽
+          </div>
+          <div className="discount-total">0₽</div>
+        </div>
+      </Form.Item>
+
+      <Form.Item>
+        <div className="price-container">
+          <div className="price-discount">Сбор за дополнительные услуги</div>
+          <div className="discount-total">{extraService}₽</div>
+        </div>
+      </Form.Item>
+
+      <Form.Item>
+        <div className="price-container">
+          <div className="price-discount">Итого</div>
+          <div className="discount-total">
+            {priceDay * valueDays - discount + extraService}₽
+          </div>
+        </div>
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
