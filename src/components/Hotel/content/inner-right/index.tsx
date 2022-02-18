@@ -8,6 +8,7 @@ const InnerRight = () => {
   return (
     <div className="inner-right">
       <MapContainer lng={-71.0815} lat={42.3445} />
+      {/* <Button type="primary">Забронировать</Button>{" "} */}
       <ModalForm />
     </div>
   );
