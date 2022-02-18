@@ -28,7 +28,7 @@ const MapContainer = (props: MapCenter) => {
   });
 
   return (
-    <div>
+    <div className="inner-map">
       <div ref={mapContainer} className="map-container" />
     </div>
   );
