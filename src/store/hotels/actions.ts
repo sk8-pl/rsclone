@@ -1,7 +1,7 @@
-import { HotelsActionsTypes } from "./types";
-import { AppThunk, HotelsActions } from "..";
+import { AppThunk } from "..";
+import { HotelsActions, HotelsActionsTypes } from "./types";
 
-const getIdLocation = async (location: string) => {
+export const getIdLocation = async (location: string) => {
   const response = await fetch(
     `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=ru&name=${location}`,
     {
@@ -51,62 +51,10 @@ export const getHotels =
   async (dispatch) => {
     dispatch({ type: HotelsActionsTypes.HOTELS_FETCH });
     try {
-      getIdLocation(request.locationId).then((id) =>
-        getHotelsData({ ...request, locationId: id }).then((data) => {
-          dispatch({ type: HotelsActionsTypes.HOTELS_LOADED, payload: data });
-        })
-      );
+      // getIdLocation(request.locationId).then((id) =>
+      //   getHotelsData({ ...request, locationId: id }).then((data) => {
+      dispatch({ type: HotelsActionsTypes.HOTELS_LOADED, payload: [] });
+      //   })
+      // );
     } catch (e) {}
-  };
-
-export const getCheckInDate =
-  (checkInDate: string): AppThunk<HotelsActions> =>
-  async (dispatch) => {
-    try {
-      dispatch({
-        type: HotelsActionsTypes.CHECKINDATE_LOADED,
-        payload: checkInDate,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-export const getCheckOutDate =
-  (checkOutDate: string): AppThunk<HotelsActions> =>
-  async (dispatch) => {
-    try {
-      dispatch({
-        type: HotelsActionsTypes.CHECKOUTDATE_LOADED,
-        payload: checkOutDate,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-export const getAdultsNum =
-  (adultsNum: number): AppThunk<HotelsActions> =>
-  async (dispatch) => {
-    try {
-      dispatch({
-        type: HotelsActionsTypes.ADULTSNUM_LOADED,
-        payload: adultsNum,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-export const getChildNum =
-  (childNum: number): AppThunk<HotelsActions> =>
-  async (dispatch) => {
-    try {
-      dispatch({
-        type: HotelsActionsTypes.CHILDNUM_LOADED,
-        payload: childNum,
-      });
-    } catch (e) {
-      console.log(e);
-    }
   };

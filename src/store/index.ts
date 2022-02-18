@@ -9,10 +9,12 @@ import {
 import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { usersReducer } from "./users/reducer";
+import { filtersReducer } from "./filters/reducer";
 
 const rootReducer = combineReducers({
   hotelsData: hotelsReducer,
   usersData: usersReducer,
+  filtersData: filtersReducer,
 });
 
 export const store = createStore(
@@ -30,3 +32,5 @@ export type AppDispatch = ThunkDispatch<AppState, void, AnyAction>;
 
 export * from "./hotels/actions";
 export * from "./hotels/types";
+export * from "./filters/types";
+export * from "./filters/actions";

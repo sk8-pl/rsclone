@@ -3,11 +3,17 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
-import { AppDispatch, AppState, getHotels } from "../../store";
+import {
+  AppDispatch,
+  AppState,
+  getCategories,
+  getCity,
+  getHotels,
+} from "../../store";
 import HotelCard from "./components/HotelCard";
 import { filterComponents } from "./constants/filterParams";
 import "./style.css";
-import { Button } from "antd";
+import { Button, Input } from "antd";
 
 interface StateProps {
   hotels: any[];
@@ -16,9 +22,14 @@ interface StateProps {
   checkOutDate: string;
   adultsNum: number;
   childNum: number;
+  city: string;
+  rooms: number;
+  categories: any;
 }
 interface DispatchProps {
   getHotels: (request: any) => Promise<void>;
+  getCity: (city: string) => Promise<void>;
+  getCategories: (request: any) => Promise<void>;
 }
 interface HotelsComponentParams {}
 type HotelsComponentProps = StateProps & DispatchProps & HotelsComponentParams;
@@ -31,18 +42,45 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
     checkOutDate,
     adultsNum,
     childNum,
+    city,
+    rooms,
+    categories,
     getHotels,
+    getCity,
+    getCategories,
   } = props;
   const [page, setPage] = useState(0);
-
+  const [cityName, setCityName] = useState(city);
   useEffect(() => {
-    getHotels({ locationId, checkInDate, checkOutDate, adultsNum, childNum });
+    // getHotels({ locationId, checkInDate, checkOutDate, adultsNum, childNum });
+    getCategories({
+      locationId,
+      checkInDate,
+      checkOutDate,
+      adultsNum,
+      childNum,
+      rooms,
+    });
   }, []);
+  console.log(categories);
 
   return (
     <div className="hotels">
       <div className="container">
         <div className="hotels-filters">
+          <div className="filter-block">
+            <span className="filter-title filter-title-select">город</span>
+            <Input
+              placeholder="Москва"
+              defaultValue={cityName}
+              name="place-town"
+              className="filters-hotel-input"
+              onChange={(e) => {
+                setCityName((e.target as HTMLInputElement).value);
+              }}
+            />
+          </div>
+
           {filterComponents.map((component, index) => (
             <div className="filter-block" key={index}>
               {component}
@@ -87,13 +125,18 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
 const mapStateToProps = (state: AppState): StateProps => ({
   hotels: state.hotelsData.hotels,
   locationId: state.hotelsData.locationId,
-  checkInDate: state.hotelsData.checkInDate,
-  checkOutDate: state.hotelsData.checkOutDate,
-  adultsNum: state.hotelsData.adultsNum,
-  childNum: state.hotelsData.childNum,
+  checkInDate: state.filtersData.checkInDate,
+  checkOutDate: state.filtersData.checkOutDate,
+  adultsNum: state.filtersData.adultsNum,
+  childNum: state.filtersData.childNum,
+  city: state.filtersData.city,
+  rooms: state.filtersData.rooms,
+  categories: state.filtersData.categories,
 });
 const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
   getHotels: (request) => dispatch(getHotels(request)),
+  getCity: (city) => dispatch(getCity(city)),
+  getCategories: (request) => dispatch(getCategories(request)),
 });
 
 export const Hotels = connect(

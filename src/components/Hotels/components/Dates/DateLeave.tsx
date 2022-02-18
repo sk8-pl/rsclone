@@ -34,7 +34,7 @@ export const DateLeaveComponent: React.FC<DateLeaveProps> = (props) => (
 );
 
 const mapStateToProps = (state: AppState): StateProps => ({
-  checkOutDate: state.hotelsData.checkOutDate,
+  checkOutDate: state.filtersData.checkOutDate,
 });
 const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
   getCheckOutDate: (checkOutDate) => dispatch(getCheckOutDate(checkOutDate)),

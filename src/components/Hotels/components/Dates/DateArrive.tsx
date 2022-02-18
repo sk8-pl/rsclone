@@ -36,7 +36,7 @@ export const DateArriveComponent: React.FC<DateArriveProps> = (props) => {
 };
 
 const mapStateToProps = (state: AppState): StateProps => ({
-  checkInDate: state.hotelsData.checkInDate,
+  checkInDate: state.filtersData.checkInDate,
 });
 const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
   getCheckInDate: (checkInDate) => dispatch(getCheckInDate(checkInDate)),
