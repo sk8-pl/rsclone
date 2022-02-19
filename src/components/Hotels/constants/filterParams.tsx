@@ -10,7 +10,7 @@ export const filterComponents = [
   <DateLeave />,
   <Guests />,
   <Price />,
-  <Rules />,
   <Comfortables />,
+  <Rules />,
 ];
 export const guestSelect = ["взрослые", "дети"];

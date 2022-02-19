@@ -35,6 +35,13 @@
   height: 40px;
   border: 1px solid rgba(31, 32, 65, 0.25);
 }
+.find-hotel {
+  z-index: 1;
+}
+.find-hotel > form {
+  box-shadow: none;
+  border: none;
+}
 
 .find-hotel__button {
   width: 100%;

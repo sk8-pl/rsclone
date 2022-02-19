@@ -67,8 +67,8 @@ export const SelectComponent: React.FC<SelectComponentProps> = (props) => {
 };
 
 const mapStateToProps = (state: AppState): StateProps => ({
-  adultsNum: state.hotelsData.adultsNum,
-  childNum: state.hotelsData.childNum,
+  adultsNum: state.filtersData.adultsNum,
+  childNum: state.filtersData.childNum,
 });
 const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
   getAdultsNum: (adultsNum) => dispatch(getAdultsNum(adultsNum)),

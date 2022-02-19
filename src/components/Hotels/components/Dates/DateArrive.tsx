@@ -3,7 +3,7 @@ import moment from "moment";
 import { connect } from "react-redux";
 import { AppDispatch, AppState, getCheckInDate } from "../../../../store";
 import { dateFormat } from "./constants/dateConstants";
-import { disabledDate } from "./helpers/disableDate";
+import { disabledDateArrive } from "./helpers/disableDate";
 import "./style.css";
 
 interface StateProps {
@@ -15,18 +15,30 @@ interface DispatchProps {
 
 type DateArriveProps = StateProps & DispatchProps;
 
+export const getDateArriveStr = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = `${date.getMonth() + 1}`.padStart(2, "0");
+  const day = `${date.getDate() + 1}`.padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 export const DateArriveComponent: React.FC<DateArriveProps> = (props) => {
   const { checkInDate } = props;
+  props.getCheckInDate(getDateArriveStr());
   return (
     <>
       <span className="filter-title">дата заезда</span>
       <DatePicker
-        defaultValue={moment(new Date(checkInDate || new Date()), dateFormat)}
+        defaultValue={moment(
+          new Date(checkInDate || getDateArriveStr()),
+          dateFormat
+        )}
         format={dateFormat}
         size="large"
         className="date-block"
         placeholder="Выбрать дату"
-        disabledDate={disabledDate}
+        disabledDate={disabledDateArrive}
         onChange={(date, dateString) => {
           props.getCheckInDate(dateString);
         }}
@@ -36,7 +48,7 @@ export const DateArriveComponent: React.FC<DateArriveProps> = (props) => {
 };
 
 const mapStateToProps = (state: AppState): StateProps => ({
-  checkInDate: state.hotelsData.checkInDate,
+  checkInDate: state.filtersData.checkInDate,
 });
 const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
   getCheckInDate: (checkInDate) => dispatch(getCheckInDate(checkInDate)),

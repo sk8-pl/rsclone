@@ -1,6 +1,9 @@
 import moment, { Moment } from "moment";
+import { getDateArriveStr } from "../DateArrive";
+import { getDateLeaveStr } from "../DateLeave";
 
-export const disabledDate = (current: Moment) => {
-  const customDate = new Date();
-  return current && current < moment(customDate, "YYYY-MM-DD");
-};
+export const disabledDateLeave = (current: Moment) =>
+  current && current < moment(getDateLeaveStr(), "YYYY-MM-DD");
+
+export const disabledDateArrive = (current: Moment) =>
+  current && current < moment(getDateArriveStr(), "YYYY-MM-DD");

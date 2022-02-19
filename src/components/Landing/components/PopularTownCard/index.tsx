@@ -1,19 +1,44 @@
+import { Link } from "react-router-dom";
 import "./style.css";
+import { getIdByLocation } from "../../../../store/hotels/actions";
 
-const PopularTownCard = () => (
-  <div>
-    <div className="city-card__title flex">
-      <h3 className="city-card__title-h3">Город</h3>
-      <img
-        className="city-card__title-img"
-        src="http://abali.ru/wp-content/uploads/2011/08/Flag_of_Norway.png"
-        alt="flag"
-      />
-    </div>
-    <p className="city-card-text">
-      <b>0000</b> вариантов размещения
-    </p>
-  </div>
-);
+const PopularTownCard = (props: any) => {
+  const id = props.id;
+
+  if (!props.city) {
+    return (
+      <div className="popular-city__card">
+        <div className="city-card__title flex">
+          <h3 className="city-card__title-h3">Город</h3>
+        </div>
+      </div>
+    );
+  }
+
+  const cityName: string = props.city[id].city;
+
+  return (
+    <Link
+      to="/hotels"
+      className="popular-city__card"
+      style={{
+        backgroundImage: `url(assets/cities/city/${props.city[id].image}.jpg)`,
+      }}
+      onClick={() => {
+        getIdByLocation(cityName);
+      }}
+    >
+      <div className="city-card__title flex">
+        <h3 className="city-card__title-h3">{props.city[id].city}</h3>
+        <div
+          className="city-card__title-img"
+          style={{
+            background: `url(assets/cities/flags/${props.city[id].country}.svg) no-repeat center center`,
+          }}
+        ></div>
+      </div>
+    </Link>
+  );
+};
 
 export default PopularTownCard;

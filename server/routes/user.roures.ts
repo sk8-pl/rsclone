@@ -32,4 +32,33 @@ userRouter.patch("/:id", async (req, res) => {
    }
 });
 
+// add/remove favorite hotels
+
+userRouter.patch("/:id/favorite", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const userExist = await User.findOne({_id: id});
+
+    if(!userExist) {
+      res.status(404).json({message: "user is not found"}); 
+    }
+
+    const {hotelId} = req.body; 
+    const favoriteHotelData = await User.find({_id:id, favoriteHotels: hotelId});
+
+    let favoriteHotel:any;
+
+    if(favoriteHotelData.length) {
+      favoriteHotel = await  User.updateOne({_id: id}, {$pull: {favoriteHotels: hotelId}})
+    }else{
+      favoriteHotel= await User.updateOne({_id: id}, {$push: {favoriteHotels: hotelId}})
+    }
+
+    res.status(200).json(favoriteHotelData);
+  } catch (e:any) {
+    res.status(500).json({message: e.message});
+  }
+})
+
 export default userRouter;

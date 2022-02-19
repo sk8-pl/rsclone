@@ -31,26 +31,12 @@ const Landing: React.FC<LandingProps> = (props) => {
       <div className="find-hotel">
         <FormHotel />
       </div>
-      <div className="popular-city">
-        <div className="popular-city__upper flex">
-          <div className="popular-city__card upper-block">
-            <PopularTownCard />
-          </div>
-          <div className="popular-city__card upper-block">
-            <PopularTownCard />
-          </div>
-        </div>
-        <div className="popular-city__lower flex">
-          <div className="popular-city__card lower-block">
-            <PopularTownCard />
-          </div>
-          <div className="popular-city__card lower-block">
-            <PopularTownCard />
-          </div>
-          <div className="popular-city__card lower-block">
-            <PopularTownCard />
-          </div>
-        </div>
+      <div className="popular-city flex">
+        <PopularTownCard city={props.city} id={0} />
+        <PopularTownCard city={props.city} id={1} />
+        <PopularTownCard city={props.city} id={2} />
+        <PopularTownCard city={props.city} id={3} />
+        <PopularTownCard city={props.city} id={4} />
       </div>
       <div className="popular-hotels">
         <h2 className="popular-hotels__title">
