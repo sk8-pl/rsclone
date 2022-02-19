@@ -7,6 +7,7 @@ const schema = new mongoose_1.Schema({
     name: { type: String, required: true },
     surname: { type: String },
     phone: { type: String },
+    favoriteHotels: [{ type: String }],
     links: [{ type: mongoose_1.Types.ObjectId, ref: 'Link' }]
 });
 exports.default = (0, mongoose_1.model)('User', schema);
