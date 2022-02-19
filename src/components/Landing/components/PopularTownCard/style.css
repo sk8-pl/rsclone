@@ -6,16 +6,23 @@
 }
 
 .city-card__title-h3{
-  font-size: 36px;
+  font-weight: 900;
+  color:#ffffff;
+  font-size: 36px; 
+  text-shadow: 1px 1px 4px rgb(70, 58, 60);
 }
 
 .city-card__title-img{
-  align-self: center;
-  height: 100%;
-  width: 36px;
+  height: 40px;
+  width: 40px;
 }
 
-.city-card-text{
-   margin-left: 30px;
-   font-size: 26px;
+.city-card-btn{
+  float: right;
+  margin-right: 20px;
+   margin-top: 90px;
+  border-radius: 10px !important;
+  height: 50px !important;
+  width: 200px !important;
+  font-size: 24px !important;
 }
