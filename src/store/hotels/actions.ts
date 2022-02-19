@@ -9,7 +9,7 @@ const getIdLocation = async (location: string) => {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
         "x-rapidapi-host": "booking-com.p.rapidapi.com",
-        "x-rapidapi-key": "7236bff4a7mshd8a14e3b145948cp1f762fjsn7dd381b669d7",
+        "x-rapidapi-key": "2189fd4ed5msh931f3fb548a96c3p1797d5jsn1bf4c8e6cd2c",
       },
     }
   );
@@ -25,7 +25,7 @@ const getHotelsData = async (request: any) => {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
         "x-rapidapi-host": "booking-com.p.rapidapi.com",
-        "x-rapidapi-key": "7236bff4a7mshd8a14e3b145948cp1f762fjsn7dd381b669d7",
+        "x-rapidapi-key": "2189fd4ed5msh931f3fb548a96c3p1797d5jsn1bf4c8e6cd2c",
       },
     }
   );

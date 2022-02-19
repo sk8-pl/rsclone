@@ -1,26 +1,36 @@
+/* eslint-disable prefer-const */
 import { Button, Rate } from "antd";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { GetUserDataResponse } from "../../../../api/getUserData.api";
 import { useHttp } from "../../../../hooks/http.hooks";
 import { AppState } from "../../../../store";
+import { getUserData } from "../../../../store/users/actions";
 import "./style.css";
 
 const HotelCard = (props: any) => {
+  const dispatch = useDispatch();
   const { request } = useHttp();
   const user = useSelector<AppState, GetUserDataResponse | null>(
     (state) => state.usersData.user
   );
-  const [favorite, setFavorite] = useState(false);
+
+  let [favorite, setFavorite] = useState(false);
 
   const favoriteHandler = async () => {
     try {
-      await request(`/${user?._id}/favorite`, "PATCH", props.data.hotel_id);
+      const hotelId = props.data.hotel_id.toString();
+      await request(`user/${user?._id}/favorite`, "PATCH", { hotelId });
+      dispatch(getUserData());
     } catch (error) {
       console.log(error);
     }
   };
+
+  user?.favoriteHotels?.map((hotel) => {
+    if (hotel == props.data.hotel_id) favorite = true;
+  });
 
   return (
     <div className="hotel-card">
@@ -29,7 +39,9 @@ const HotelCard = (props: any) => {
         style={{ backgroundImage: `url(${props.data.max_photo_url})` }}
       >
         <div
-          className={`favorite-icon ${favorite ? "favorite" : ""}`}
+          className={`${
+            favorite ? " favorite-icon favorite" : "favorite-icon"
+          }`}
           onClick={() => {
             setFavorite(!favorite);
             favoriteHandler();

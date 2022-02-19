@@ -38,16 +38,22 @@ userRouter.patch("/:id", (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).json({ message: err.message });
     }
 }));
-userRouter.post("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+userRouter.patch("/:id/favorite", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const favoriteHotelData = yield User_1.default.find({ favoriteHotels: "123" });
-        if (favoriteHotelData) {
-            User_1.default.updateOne({ _id: req.params.id }, { $pop: { favoriteHotels: "123" } });
+        const id = req.params.id;
+        const userExist = yield User_1.default.findOne({ _id: id });
+        if (!userExist) {
+            res.status(404).json({ message: "user is not found" });
+        }
+        const { hotelId } = req.body;
+        const favoriteHotelData = yield User_1.default.find({ _id: id, favoriteHotels: hotelId });
+        let favoriteHotel;
+        if (favoriteHotelData.length) {
+            favoriteHotel = yield User_1.default.updateOne({ _id: id }, { $pull: { favoriteHotels: hotelId } });
         }
         else {
-            User_1.default.updateOne({ _id: req.params.id }, { $push: { favoriteHotels: "123" } });
+            favoriteHotel = yield User_1.default.updateOne({ _id: id }, { $push: { favoriteHotels: hotelId } });
         }
-        res.status(404).json({ message: "user is not found" });
         res.status(200).json(favoriteHotelData);
     }
     catch (e) {
