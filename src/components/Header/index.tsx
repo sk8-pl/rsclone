@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { AppDispatch, AppState } from "../../store";
 import { getUserData } from "../../store/users/actions";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 interface StateProps {
   user: any;
@@ -23,10 +24,10 @@ const Header: React.FC<HeaderProps> = (props) => {
   return (
     <div className="header">
       <div className="container">
-        <div className="header-logo">
+        <Link className="header-logo" to="/">
           <div className="logo-img"></div>
           <h1 className="logo-text">SkyHotel</h1>
-        </div>
+        </Link>
         <HeaderBtn data={props.user} />
       </div>
     </div>
