@@ -12,3 +12,7 @@
    background-color: rgba(241, 241, 241, 0.747);
 }
 
+.ant-form-horizontal{
+   border:none;
+   box-shadow: none;
+}

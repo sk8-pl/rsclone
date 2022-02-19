@@ -3,6 +3,7 @@ import "./style.css";
 import { Form, Input, Button } from "antd";
 import { useState } from "react";
 import { useHttp } from "../../../../hooks/http.hooks";
+import { Link } from "react-router-dom";
 
 const formItemLayout = {
   labelCol: {
@@ -168,15 +169,17 @@ const RegistrationForm = () => {
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
-        <Button
-          type="primary"
-          htmlType="submit"
-          className="registration-button"
-          onClick={reqisterHandler}
-          disabled={loading}
-        >
-          Register
-        </Button>
+        <Link to={"/sign-in"}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="registration-button"
+            onClick={reqisterHandler}
+            disabled={loading}
+          >
+            Register
+          </Button>
+        </Link>
       </Form.Item>
     </Form>
   );
