@@ -6,7 +6,7 @@ export interface GetCitiesDataResponse {
 }
 
 export const getCitiesDataApi = async () => {
-  const cityData = fetch(`/cities`)
+  const cityData = fetch(`http://localhost:8080/cities`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(response.statusText);

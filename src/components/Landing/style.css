@@ -13,7 +13,7 @@
 
  .find-hotel {
    position: absolute;
-   top: 140px;
+   top: 170px;
    margin-left: 140px;
    width: 380px;
    padding: 30px;
@@ -26,23 +26,23 @@
   margin: 30px auto;
 }
 
-.popular-city__lower{
-  margin-top: 30px;
-}
-
-.popular-city__card{   
+.popular-city__card{ 
+  margin-top: 25px;  
   height: 275px;
   background: url(https://via.placeholder.com/2000x1900)center center no-repeat;
+  filter: brightness(90%);
   background-size: cover;
   color: white;
-}
-
-.upper-block{
-  width: 49%;
-}
-
-.lower-block{
   width: 32%;
+}
+
+.popular-city__card:hover{
+  filter:none;
+  cursor: pointer;
+}
+
+.popular-city__card:nth-child(-n+2){
+  width: 49%;
 }
 
 .popular-hotels{
