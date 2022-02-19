@@ -3,6 +3,7 @@ import { HotelsActions, InitialHotelsState, HotelsActionsTypes } from "./types";
 const initialState: InitialHotelsState = {
   hotels: [],
   locationId: "",
+  totalPages: 0,
 };
 
 export const hotelsReducer = (
@@ -13,9 +14,11 @@ export const hotelsReducer = (
     case HotelsActionsTypes.HOTELS_FETCH:
       return { ...state };
     case HotelsActionsTypes.HOTELS_LOADED:
-      return { ...state, hotels: action.payload.result };
+      return { ...state, hotels: action.payload };
     case HotelsActionsTypes.LOCATION_LOADED:
       return { ...state, locationId: action.payload };
+    case HotelsActionsTypes.TOTALPAGES_LOADED:
+      return { ...state, totalPages: action.payload };
     default:
       return state;
   }

@@ -33,6 +33,16 @@ interface LoadedCategoriesAction {
   payload: string[];
 }
 
+interface LoadedPriceAction {
+  type: FiltersActionsTypes.PRICE_LOADED;
+  payload: number[];
+}
+
+interface LoadedCategoriesIdsAction {
+  type: FiltersActionsTypes.CATEGORIESIDS_LOADED;
+  payload: string[];
+}
+
 export enum FiltersActionsTypes {
   CHECKINDATE_LOADED = "CHECKINDATE_LOADED",
   CHECKOUTDATE_LOADED = "CHECKOUTDATE_LOADED",
@@ -41,6 +51,8 @@ export enum FiltersActionsTypes {
   CITY_LOADED = "CITY_LOADED",
   ROOMS_LOADED = "ROOMS_LOADED",
   CATEGORIES_LOADED = "CATEGORIES_LOADED",
+  PRICE_LOADED = "PRICE_LOADED",
+  CATEGORIESIDS_LOADED = "CATEGORIESIDS_LOADED",
 }
 
 export type FiltersActions =
@@ -50,7 +62,9 @@ export type FiltersActions =
   | LoadedChildNumAction
   | LoadedCityAction
   | LoadedRoomsAction
-  | LoadedCategoriesAction;
+  | LoadedCategoriesAction
+  | LoadedPriceAction
+  | LoadedCategoriesIdsAction;
 
 export interface InitialFiltersState {
   checkInDate: string;
@@ -60,4 +74,6 @@ export interface InitialFiltersState {
   city: string;
   rooms: number;
   categories: string[];
+  price: number[];
+  categoriesIds: string[];
 }

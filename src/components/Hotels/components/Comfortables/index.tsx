@@ -24,7 +24,7 @@ export const ComfortablesComponent: React.FC<ComfortablesComponentProps> = (
         <button
           className="comf-btn"
           onClick={() => {
-            if (rooms) getRooms(rooms - 1);
+            if (rooms > 1) getRooms(rooms - 1);
           }}
         >
           -
