@@ -1,40 +1,31 @@
-.footer {
-  border-top: 1px solid rgba(31, 32, 65, 0.1);
-}
-.footer .container {
-  height: 70px;
+
+.footer .container {  
+  height: 120px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.social-menu {
-  list-style-type: none;
+
+.flex{
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-.social-link {
-  display: block;
-  width: 30px;
-  height: 30px;
-  background-size: contain;
-  margin: 0 10px;
-  background-color: #bc9cff;
-  transition: 0.2s;
+
+.rssschool{
+  width: 150px;
+  height: 50px;
+  background: url(https://rs.school/images/rs_school_js.svg) no-repeat center center;
 }
-.instagram-link {
-  width: 40px;
-  height: 40px;
-  -webkit-mask-image: url(../../assets/inst.svg);
-  mask-image: url(../../assets/inst.svg);
+
+.link-git{
+  margin-left: 20px;
+  font-size: 26px;
+  font-weight: 900;
+  color: black;
 }
-.fb-link {
-  -webkit-mask-image: url(../../assets/fb.svg);
-  mask-image: url(../../assets/fb.svg);
-}
-.twitter-link {
-  -webkit-mask-image: url(../../assets/twitter.svg);
-  mask-image: url(../../assets/twitter.svg);
-}
-.social-link:hover {
-  background-color: #66d2ea;
+
+.year{
+  font-size: 30px;
 }
