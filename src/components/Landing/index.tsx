@@ -5,8 +5,10 @@ import PopularHotelCard from "./components/PopularHotelCard";
 import AnimationBackground from "./components/animation-background";
 import { useEffect } from "react";
 import { AppDispatch, AppState } from "../../store";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { getCitiesData } from "../../store/cities/actions";
+import { GetHotelsByLocationDataResponse } from "../../api/getHotelsByLocationData.api";
+import { Spin } from "antd";
 
 interface StateProps {
   city: any;
@@ -19,9 +21,26 @@ type LandingProps = StateProps & DispatchProps;
 
 const Landing: React.FC<LandingProps> = (props) => {
   const { city, getCitiesData: getData } = props;
+
   useEffect(() => {
     getData();
   }, [getData]);
+
+  const hotelByLocation = useSelector<
+    AppState,
+    GetHotelsByLocationDataResponse | null
+  >((state) => state.hotelsByLocationData.hotelsByLocation);
+
+  const getRundomNum = (finish: number) => {
+    return Math.floor(Math.random() * (0 - finish) + finish);
+  };
+
+  if (hotelByLocation === null)
+    return (
+      <div className="expectation background">
+        <Spin size="large" />
+      </div>
+    );
 
   return (
     <div className="container">
@@ -40,13 +59,37 @@ const Landing: React.FC<LandingProps> = (props) => {
       </div>
       <div className="popular-hotels">
         <h2 className="popular-hotels__title">
-          Отели, которые нравятся гостям
+          {hotelByLocation.result[0].country_trans} - прекрасная страна!
         </h2>
         <div className="popular-hotels-cards flex">
-          <PopularHotelCard />
-          <PopularHotelCard />
-          <PopularHotelCard />
-          <PopularHotelCard />
+          <PopularHotelCard
+            hotel={
+              hotelByLocation.result[
+                getRundomNum(hotelByLocation.result.length)
+              ]
+            }
+          />
+          <PopularHotelCard
+            hotel={
+              hotelByLocation.result[
+                getRundomNum(hotelByLocation.result.length)
+              ]
+            }
+          />
+          <PopularHotelCard
+            hotel={
+              hotelByLocation.result[
+                getRundomNum(hotelByLocation.result.length)
+              ]
+            }
+          />
+          <PopularHotelCard
+            hotel={
+              hotelByLocation.result[
+                getRundomNum(hotelByLocation.result.length)
+              ]
+            }
+          />
         </div>
       </div>
     </div>
