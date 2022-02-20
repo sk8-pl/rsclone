@@ -31,7 +31,7 @@ const TagsWorth = () => {
   return (
     <>
       <Divider orientation="left">Удобства</Divider>
-      <div>{result}</div>
+      <div className="tags-inner">{result}</div>
     </>
   );
 };
