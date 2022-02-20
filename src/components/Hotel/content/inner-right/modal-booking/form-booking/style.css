@@ -7,3 +7,8 @@
     display: flex;
     justify-content: space-between;
 }
+
+.date-booking {
+    display: flex;
+    justify-content: space-between;
+}
