@@ -15,10 +15,18 @@ const Collage = ({ idHotel }: CollageInterface) => {
       </div>
       <div className="collage-left">
         <div className="collage-img_left collage-img">
-          <ImageHotel num={1} idHotel={idHotel} />
+          <ImageHotel num={2} idHotel={idHotel} />
         </div>
         <div className="collage-img_left collage-img">
-          <ImageHotel num={2} idHotel={idHotel} />
+          <ImageHotel num={4} idHotel={idHotel} />
+        </div>
+      </div>
+      <div className="collage-left">
+        <div className="collage-img_left collage-img">
+          <ImageHotel num={5} idHotel={idHotel} />
+        </div>
+        <div className="collage-img_left collage-img">
+          <ImageHotel num={6} idHotel={idHotel} />
         </div>
       </div>
     </div>

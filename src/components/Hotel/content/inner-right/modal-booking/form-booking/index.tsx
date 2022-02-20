@@ -1,10 +1,10 @@
 import "./style.css";
 import { useState } from "react";
-import { Form, Select, DatePicker, Button } from "antd";
+import { Form, Select, Button } from "antd";
 import { tailFormItemLayout } from "../../../../constants/tailForm";
-import { rangeConfig } from "../../../../constants/tailForm";
+import { DateArrive } from "../../../../../Hotels/components/Dates/DateArrive";
+import { DateLeave } from "../../../../../Hotels/components/Dates/DateLeave";
 
-const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 type LayoutType = Parameters<typeof Form>[0]["layout"];
@@ -43,9 +43,10 @@ const FormBooking = () => {
         <div className="form-header_right">{priceDay}₽ в сутки</div>
       </div>
 
-      <Form.Item name="range-picker" label="RangePicker" {...rangeConfig}>
-        <RangePicker />
-      </Form.Item>
+      <div className="date-booking">
+        <DateArrive />
+        <DateLeave />
+      </div>
 
       <Form.Item
         name="guest"
