@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Modal, Button } from "antd";
 import FormBooking from "./form-booking";
 
-const ModalForm = () => {
+const ModalForm = (props: any) => {
+  const data = props.data;
   const [visible, setVisible] = useState(false);
   return (
     <>
@@ -19,7 +20,7 @@ const ModalForm = () => {
         cancelText="Отмена"
         okText="Забронировать"
       >
-        <FormBooking />
+        <FormBooking data={props.data} />
       </Modal>
     </>
   );

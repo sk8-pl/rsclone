@@ -4,12 +4,16 @@ import { Form, Select, Button } from "antd";
 import { tailFormItemLayout } from "../../../../constants/tailForm";
 import { DateArrive } from "../../../../../Hotels/components/Dates/DateArrive";
 import { DateLeave } from "../../../../../Hotels/components/Dates/DateLeave";
+import { useParams } from "react-router";
 
 const { Option } = Select;
 
 type LayoutType = Parameters<typeof Form>[0]["layout"];
 
-const FormBooking = () => {
+const FormBooking = (props: any) => {
+  const data = props.data;
+  const { id } = useParams();
+
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState<LayoutType>("horizontal");
 
@@ -25,7 +29,7 @@ const FormBooking = () => {
         }
       : null;
 
-  const priceDay = 999.9;
+  const priceDay = data.minrate;
   const valueDays = 4;
   const discount = 300;
   const extraService = 300;
@@ -39,7 +43,7 @@ const FormBooking = () => {
       onValuesChange={onFormLayoutChange}
     >
       <div className="form-header">
-        <div className="form-header_left">№123123</div>
+        <div className="form-header_left">ID Отеля{id}</div>
         <div className="form-header_right">{priceDay}₽ в сутки</div>
       </div>
 
