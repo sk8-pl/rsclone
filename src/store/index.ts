@@ -14,7 +14,6 @@ import { citiesReducer } from "./cities/reducer";
 import { compareHotelsReducer } from "./compare-hotels/reducer";
 import { hotelsByLocationReducer } from "./hotelsByLocation/reducer";
 
-
 const rootReducer = combineReducers({
   hotelsData: hotelsReducer,
   usersData: usersReducer,
