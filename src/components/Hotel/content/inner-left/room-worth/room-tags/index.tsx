@@ -34,7 +34,10 @@ const TagsWorth = () => {
     };
     fetchData();
   }, [id]);
-
+  if (!Array.isArray(dataTags)) {
+    console.log(">>> dataTagsMap", { dataTags });
+    return null;
+  }
   const result = dataTags.map((obj, i) => {
     const numColor = i + 2 > colors.length ? i % colors.length : i;
     return <Tag color={colors[numColor]}>{obj.facility_name}</Tag>;
