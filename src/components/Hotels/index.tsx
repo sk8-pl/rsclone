@@ -27,7 +27,6 @@ interface StateProps {
   rooms: number;
   totalPages: number;
   categoriesIds: string[];
-  price: number[];
   hotelsForCompare: number[];
   compareHotelData: any;
 }
@@ -52,7 +51,6 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
     rooms,
     totalPages,
     categoriesIds,
-    price,
     hotelsForCompare,
     compareHotelData,
     getHotels,
@@ -72,7 +70,6 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
     childNum,
     categoriesIds,
     rooms,
-    price,
   });
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -96,6 +93,7 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
       rooms: hotelsParams.rooms,
     });
   }, [page, hotelsParams]);
+
   return (
     <div className="hotels">
       <div className="container">
@@ -129,7 +127,6 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
                 childNum,
                 categoriesIds,
                 rooms,
-                price,
               });
             }}
           >
@@ -176,7 +173,6 @@ const mapStateToProps = (state: AppState): StateProps => ({
   rooms: state.filtersData.rooms,
   totalPages: state.hotelsData.totalPages,
   categoriesIds: state.filtersData.categoriesIds,
-  price: state.filtersData.price,
   hotelsForCompare: state.compareHotelsData.hotelsForCompare,
   compareHotelData: state.compareHotelsData.compareHotelData,
 });

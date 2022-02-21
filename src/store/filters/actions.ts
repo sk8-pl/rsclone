@@ -108,19 +108,6 @@ const getCategoriesData = async (request: any) => {
   return result.filter;
 };
 
-export const getPrice =
-  (price: number[]): AppThunk<FiltersActions> =>
-  async (dispatch) => {
-    try {
-      dispatch({
-        type: FiltersActionsTypes.PRICE_LOADED,
-        payload: price,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
 export const getCategoriesIds =
   (categories: string[]): AppThunk<FiltersActions> =>
   async (dispatch) => {

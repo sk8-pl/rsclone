@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import "./style.css";
-import { getIdByLocation } from "../../../../store/hotels/actions";
 
 const PopularTownCard = (props: any) => {
   const id = props.id;
@@ -25,7 +24,7 @@ const PopularTownCard = (props: any) => {
         backgroundImage: `url(assets/cities/city/${props.city[id].image}.jpg)`,
       }}
       onClick={() => {
-        getIdByLocation(cityName);
+        props.getIdByLocation(cityName);
       }}
     >
       <div className="city-card__title flex">

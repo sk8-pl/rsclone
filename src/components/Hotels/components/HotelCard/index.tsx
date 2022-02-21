@@ -16,9 +16,6 @@ const HotelCard = (props: any) => {
     (state) => state.usersData.user
   );
 
-  const comparedCard = [...props.hotelsForCompare].includes(props.data.hotel_id)
-    ? true
-    : false;
   const [compared, setCompared] = useState(
     [...props.hotelsForCompare].includes(props.data.hotel_id) ? true : false
   );
