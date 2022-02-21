@@ -5,6 +5,7 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../../context/Auth.Context";
 import { useHttp } from "../../../../hooks/http.hooks";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const auth = useContext(AuthContext);
@@ -73,9 +74,9 @@ const LoginForm = () => {
           Log in
         </Button>
         Or{" "}
-        <a className="login-form-register" href="">
+        <Link className="login-form-register" to="/registration">
           register now!
-        </a>
+        </Link>
       </Form.Item>
     </Form>
   );

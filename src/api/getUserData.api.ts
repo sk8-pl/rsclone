@@ -5,6 +5,7 @@ export interface GetUserDataResponse {
   phone?: string;
   email?: string;
   favoriteHotels?: string[];
+  links?: [];
 }
 
 export const getUserDataApi = async () => {

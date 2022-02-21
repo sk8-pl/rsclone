@@ -2,7 +2,7 @@ import { Card } from "antd";
 
 const { Meta } = Card;
 
-export const BookingCard = () => (
+export const BookingCard = (props: any) => (
   <Card
     title="Hotel Park Inn"
     hoverable

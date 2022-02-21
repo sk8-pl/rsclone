@@ -63,7 +63,9 @@ const Landing: React.FC<LandingProps> = (props) => {
       </div>
       <div className="popular-hotels">
         <h2 className="popular-hotels__title">
-          {hotelByLocation.result[0].country_trans} - прекрасная страна!
+          {hotelByLocation.result[0].country_trans === undefined
+            ? "Вы находитесь в прекрасном месте"
+            : `${hotelByLocation.result[0].country_trans} - прекрасная страна!`}
         </h2>
         <div className="popular-hotels-cards flex">
           {[...new Array(4)].map((val, index) => (

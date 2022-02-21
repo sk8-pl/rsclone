@@ -38,6 +38,16 @@ userRouter.patch("/:id", (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).json({ message: err.message });
     }
 }));
+userRouter.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        yield User_1.default.deleteOne({ _id: id });
+        res.status(200).json({ message: "user deleted" });
+    }
+    catch (e) {
+        res.status(500).json({ message: e.message });
+    }
+}));
 userRouter.patch("/:id/favorite", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;

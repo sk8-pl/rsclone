@@ -32,6 +32,21 @@ userRouter.patch("/:id", async (req: Request, res: Response) => {
    }
 });
 
+// delete user 
+
+userRouter.delete("/:id", async (req: Request, res: Response) => {
+  try{
+    const id = req.params.id;
+
+    await User.deleteOne({_id: id});
+
+    res.status(200).json({message: "user deleted"});
+
+  }catch(e: any){
+    res.status(500).json({message: e.message});
+  }
+})
+
 // add/remove favorite hotels
 
 userRouter.patch("/:id/favorite", async (req: Request, res: Response) => {

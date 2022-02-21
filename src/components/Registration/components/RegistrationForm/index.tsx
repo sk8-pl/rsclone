@@ -80,22 +80,7 @@ const RegistrationForm = () => {
       >
         <Input name="name" placeholder="Введите имя" onChange={changeHandler} />
       </Form.Item>
-      <Form.Item
-        name="surname"
-        label="Фамилия"
-        rules={[
-          {
-            message: "Пожалуйста, введите свою фамиилю!",
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input
-          name="surname"
-          placeholder="Введите фамилию"
-          onChange={changeHandler}
-        />
-      </Form.Item>
+
       <Form.Item
         name="email"
         label="E-mail"
@@ -122,6 +107,7 @@ const RegistrationForm = () => {
         label="Пароль"
         rules={[
           {
+            min: 6,
             required: true,
             message: "Введите пароль!",
           },
@@ -157,18 +143,6 @@ const RegistrationForm = () => {
       >
         <Input.Password placeholder="Повторите пароль" />
       </Form.Item>
-      <Form.Item
-        name="phone"
-        label="Номер телефона"
-        rules={[{ message: "Введите номер телефона!" }]}
-      >
-        <Input
-          name="phone"
-          placeholder="Введите номер телефона"
-          style={{ width: "100%" }}
-          onChange={changeHandler}
-        />
-      </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
         <Link to={"/sign-in"}>
@@ -177,7 +151,11 @@ const RegistrationForm = () => {
             htmlType="submit"
             className="registration-button"
             onClick={reqisterHandler}
-            disabled={loading}
+            disabled={
+              !form.isFieldsTouched(true) ||
+              !!form.getFieldsError().filter(({ errors }) => errors.length)
+                .length
+            }
           >
             Register
           </Button>
