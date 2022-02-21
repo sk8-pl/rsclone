@@ -1,7 +1,45 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { AppDispatch, AppState } from "../../store";
+import { getHotelsByLocationData } from "../../store/hotelsByLocation/actiont";
 import "./style.css";
 
-const Footer = () => {
+interface StateProps {
+  hotelsByLocation: any;
+}
+interface DispatchProps {
+  getHotelsByLocationData: () => Promise<void>;
+}
+
+type FooterProps = StateProps & DispatchProps;
+
+const Footer: React.FC<FooterProps> = (props) => {
+  const { hotelsByLocation, getHotelsByLocationData: getData } = props;
+  useEffect(() => {
+    getData();
+  }, [getData]);
+
+  let latitude: number;
+  let longitude: number;
+
+  const success = (pos: any) => {
+    const crd = pos.coords;
+    latitude = crd.latitude;
+    longitude = crd.longitude;
+    localStorage.setItem("latitude", latitude.toString());
+    localStorage.setItem("longitude", longitude.toString());
+  };
+
+  const error = async () => {
+    latitude = 48.85341;
+    longitude = 2.3488;
+    localStorage.setItem("latitude", latitude.toString());
+    localStorage.setItem("longitude", longitude.toString());
+  };
+
+  const geo = navigator.geolocation;
+  geo.getCurrentPosition(success, error);
+
   return (
     <div className="footer">
       <div className="container flex">
@@ -23,4 +61,11 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+const mapStateToProps = (state: AppState): StateProps => ({
+  hotelsByLocation: state.hotelsByLocationData.hotelsByLocation,
+});
+const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
+  getHotelsByLocationData: () => dispatch(getHotelsByLocationData()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);
