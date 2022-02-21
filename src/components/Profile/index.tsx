@@ -1,6 +1,6 @@
 import "./style.css";
 import { Avatar, Button, Form, Input, Modal } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { ExclamationCircleOutlined, UserOutlined } from "@ant-design/icons";
 import { BookingCard } from "./components/BookingCard";
 import { UploadPhoto } from "./components/UploadPhoto";
 import { FavoriteHotelCard } from "./components/FavoriteHotelCard";
@@ -59,6 +59,31 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const deleteUser = async () => {
+    try {
+      const url = `https://rsclone-server.herokuapp.com/user/${user?._id}`;
+      await request(url, "DELETE");
+      setIsModalVisible(false);
+      document.location.reload();
+      localStorage.removeItem("UserData");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const confirm = () => {
+    Modal.confirm({
+      title: "Внимание!",
+      icon: <ExclamationCircleOutlined />,
+      content: "Вы точно хотите удалить свой аккаунт?",
+      okText: "Да",
+      cancelText: "Нет",
+      onOk() {
+        deleteUser();
+      },
+    });
   };
 
   const changeImageUserHandler = async () => {
@@ -123,6 +148,9 @@ const Profile = () => {
               </div>
               <Button type="primary" className="change-btn" onClick={showModal}>
                 Изменить
+              </Button>
+              <Button type="primary" danger onClick={confirm}>
+                Удалить аккаунт
               </Button>
               <Modal
                 title="Редактировать данные"
