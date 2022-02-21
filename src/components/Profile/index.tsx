@@ -209,9 +209,11 @@ const Profile = () => {
         <div className="booking-info">
           <span className="info-title">Ваши бронирования:</span>
           <div className="booking-cards-container">
-            <BookingCard />
-            <BookingCard />
-            <BookingCard />
+            {user?.links?.length === 0
+              ? "Вы еще не забронировали отель"
+              : user?.links?.map((id) => {
+                  return <BookingCard data={id} />;
+                })}
           </div>
         </div>
         <div className="booking-info">
