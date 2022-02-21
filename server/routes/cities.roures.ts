@@ -1,9 +1,9 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import Cities from "../models/Cities";
 
 const citiesRouter = Router();
 
-citiesRouter.get("/", async (req, res) => {  
+citiesRouter.get("/", async (req: Request, res: Response) => {  
    try { 
      const citiesData = await Cities.aggregate([{$sample: {size: 5}}]);
      if(!citiesData){

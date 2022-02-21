@@ -1,5 +1,5 @@
 import config from "config";
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import { check, validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -14,7 +14,7 @@ router.post(
     check("email", "Error in email").isEmail(),
     check("password", "Error in password").isLength({ min: 6 }),
   ],
-  async (req:any, res:any) => {
+  async (req: Request, res: Response) => {
     try {
       const errors = validationResult(req);
 
@@ -55,7 +55,7 @@ router.post(
       .isEmail(),
     check("password", "Please enter a valid password").exists(),
   ],
-  async (req:any, res:any) => {   
+  async (req: Request, res: Response) => {   
     try {       
       const errors = validationResult(req);
 
