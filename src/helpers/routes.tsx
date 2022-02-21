@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import { CompareHotels } from "../components/CompareHotels";
 import Hotel from "../components/Hotel";
 import { Hotels } from "../components/Hotels";
 import Landing from "../components/Landing";
@@ -13,6 +14,7 @@ export const useRouter = (isAuthenticated: boolean) => {
       { path: "/hotels", element: <Hotels /> },
       // { path: "/hotel", element: <Hotel /> },
       { path: "/profile", element: <Profile /> },
+      { path: "/compare-hotels", element: <CompareHotels /> },
       { path: "*", element: <Navigate to="/" /> },
     ];
   }
@@ -23,6 +25,7 @@ export const useRouter = (isAuthenticated: boolean) => {
     // { path: "/hotel", element: <Hotel /> },
     { path: "/registration", element: <Registration /> },
     { path: "/sign-in", element: <SignIn /> },
+    { path: "/compare-hotels", element: <CompareHotels /> },
     { path: "*", element: <Navigate to="/" /> },
   ];
 };

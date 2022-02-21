@@ -7,7 +7,8 @@ import {
   AppDispatch,
   AppState,
   getCategories,
-  getCity,
+  getComparedHotels,
+  getComparedHotelsMainData,
   getHotels,
   getIdByLocation,
 } from "../../store";
@@ -23,18 +24,19 @@ interface StateProps {
   checkOutDate: string;
   adultsNum: number;
   childNum: number;
-  city: string;
   rooms: number;
-  categories: any;
   totalPages: number;
   categoriesIds: string[];
   price: number[];
+  hotelsForCompare: number[];
+  compareHotelData: any;
 }
 interface DispatchProps {
   getHotels: (request: any) => Promise<void>;
-  getCity: (city: string) => Promise<void>;
   getCategories: (request: any) => Promise<void>;
   getIdByLocation: (city: string) => Promise<void>;
+  getComparedHotels: (ids: number[]) => Promise<void>;
+  getComparedHotelsMainData: (hotels: any) => Promise<void>;
 }
 interface HotelsComponentParams {}
 type HotelsComponentProps = StateProps & DispatchProps & HotelsComponentParams;
@@ -47,19 +49,21 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
     checkOutDate,
     adultsNum,
     childNum,
-    city,
     rooms,
-    categories,
     totalPages,
     categoriesIds,
     price,
+    hotelsForCompare,
+    compareHotelData,
     getHotels,
-    getCity,
     getCategories,
     getIdByLocation,
+    getComparedHotels,
+    getComparedHotelsMainData,
   } = props;
 
   const [page, setPage] = useState(0);
+
   const [hotelsParams, setHotelsParams] = useState({
     locationId,
     checkInDate,
@@ -137,15 +141,18 @@ const HotelsComponent: React.FC<HotelsComponentProps> = (props) => {
             Номера, которые мы для вас подобрали
           </div>
           <div className="hotels-cards-container">
-            {hotels
-              .filter(
-                ({ min_total_price }) =>
-                  min_total_price >= hotelsParams.price[0] &&
-                  min_total_price <= hotelsParams.price[1]
-              )
-              .map((val, index) => {
-                return <HotelCard data={val} key={index} />;
-              })}
+            {hotels.map((val, index) => {
+              return (
+                <HotelCard
+                  data={val}
+                  key={index}
+                  hotelsForCompare={hotelsForCompare}
+                  getComparedHotels={getComparedHotels}
+                  compareHotelData={compareHotelData}
+                  getComparedHotelsMainData={getComparedHotelsMainData}
+                />
+              );
+            })}
           </div>
           <Pagination
             current={page + 1}
@@ -166,18 +173,20 @@ const mapStateToProps = (state: AppState): StateProps => ({
   checkOutDate: state.filtersData.checkOutDate,
   adultsNum: state.filtersData.adultsNum,
   childNum: state.filtersData.childNum,
-  city: state.filtersData.city,
   rooms: state.filtersData.rooms,
-  categories: state.filtersData.categories,
   totalPages: state.hotelsData.totalPages,
   categoriesIds: state.filtersData.categoriesIds,
   price: state.filtersData.price,
+  hotelsForCompare: state.compareHotelsData.hotelsForCompare,
+  compareHotelData: state.compareHotelsData.compareHotelData,
 });
 const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
   getHotels: (request) => dispatch(getHotels(request)),
-  getCity: (city) => dispatch(getCity(city)),
   getCategories: (request) => dispatch(getCategories(request)),
   getIdByLocation: (city) => dispatch(getIdByLocation(city)),
+  getComparedHotels: (ids) => dispatch(getComparedHotels(ids)),
+  getComparedHotelsMainData: (hotels) =>
+    dispatch(getComparedHotelsMainData(hotels)),
 });
 
 export const Hotels = connect(

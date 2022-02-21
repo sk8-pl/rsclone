@@ -2,42 +2,31 @@
   display: flex;
 }
 .header-btn {
-   font-style: normal;
-   font-weight: bold;
-   font-size: 12px;
-   line-height: 15px;
-   height: 40px;
-   text-transform: uppercase;
-   border-radius: 22px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   padding: 0 20px;
-   cursor: pointer;
- }
- .sign-in {
-   color: #8ba4f9;
-   background-color: transparent;
-   border: 1px solid #8ba4f9;
-   margin-right: 20px;
- }
- .sign-up {
-   background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
-   color: #fff;
-   border: none;
- }
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+  height: 40px;
+  text-transform: uppercase;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  cursor: pointer;
+}
 
- .sign-out{
-   color: #ffffff;
-   background-color: #f06868;
- }
- 
-.sign-out:hover{  
+.sign-out {
+  color: #ffffff;
+  background-color: #f06868;
+}
+
+.sign-out:hover {
   color: #ffffff;
   background-color: #ff0a0a;
 }
 
-.header-user-name{
+.header-user-name {
   font-size: 26px;
   padding-right: 10px;
 }

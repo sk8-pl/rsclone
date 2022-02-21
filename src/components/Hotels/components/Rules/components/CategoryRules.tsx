@@ -1,4 +1,3 @@
-import { Checkbox } from "antd";
 import { ICategory, IFilters } from "..";
 import "./../style.css";
 
@@ -17,7 +16,7 @@ export const CategoryRules = ({
   return (
     <div className="category-rule">
       <span className="filter-title ">{title}</span>
-      {categories.map(({ name, id }: ICategory) => (
+      {categories.map(({ name, id, count }: ICategory) => (
         <div className="rule-checkbox">
           <input
             type="checkbox"
@@ -35,6 +34,7 @@ export const CategoryRules = ({
           <label htmlFor={id} className="checkbox-text">
             {name}
           </label>
+          <span className="filter-count">{count ? count : ""}</span>
         </div>
       ))}
     </div>

@@ -11,13 +11,16 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { usersReducer } from "./users/reducer";
 import { filtersReducer } from "./filters/reducer";
 import { citiesReducer } from "./cities/reducer";
+import { compareHotelsReducer } from "./compare-hotels/reducer";
 import { hotelsByLocationReducer } from "./hotelsByLocation/reducer";
+
 
 const rootReducer = combineReducers({
   hotelsData: hotelsReducer,
   usersData: usersReducer,
   filtersData: filtersReducer,
   citiesData: citiesReducer,
+  compareHotelsData: compareHotelsReducer,
   hotelsByLocationData: hotelsByLocationReducer,
 });
 
@@ -38,3 +41,5 @@ export * from "./hotels/actions";
 export * from "./hotels/types";
 export * from "./filters/types";
 export * from "./filters/actions";
+export * from "./compare-hotels/types";
+export * from "./compare-hotels/actions";
