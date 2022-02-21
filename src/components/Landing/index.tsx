@@ -4,7 +4,7 @@ import PopularTownCard from "./components/PopularTownCard";
 import PopularHotelCard from "./components/PopularHotelCard";
 import AnimationBackground from "./components/animation-background";
 import { useEffect } from "react";
-import { AppDispatch, AppState } from "../../store";
+import { AppDispatch, AppState, getIdByLocation } from "../../store";
 import { connect, useSelector } from "react-redux";
 import { getCitiesData } from "../../store/cities/actions";
 import { GetHotelsByLocationDataResponse } from "../../api/getHotelsByLocationData.api";
@@ -15,12 +15,13 @@ interface StateProps {
 }
 interface DispatchProps {
   getCitiesData: () => Promise<void>;
+  getIdByLocation: (city: string) => Promise<void>;
 }
 
 type LandingProps = StateProps & DispatchProps;
 
 const Landing: React.FC<LandingProps> = (props) => {
-  const { city, getCitiesData: getData } = props;
+  const { city, getCitiesData: getData, getIdByLocation } = props;
 
   useEffect(() => {
     getData();
@@ -51,45 +52,30 @@ const Landing: React.FC<LandingProps> = (props) => {
         <FormHotel />
       </div>
       <div className="popular-city flex">
-        <PopularTownCard city={props.city} id={0} />
-        <PopularTownCard city={props.city} id={1} />
-        <PopularTownCard city={props.city} id={2} />
-        <PopularTownCard city={props.city} id={3} />
-        <PopularTownCard city={props.city} id={4} />
+        {[...new Array(5)].map((val, index) => (
+          <PopularTownCard
+            city={city}
+            id={index}
+            getIdByLocation={getIdByLocation}
+            key={index}
+          />
+        ))}
       </div>
       <div className="popular-hotels">
         <h2 className="popular-hotels__title">
           {hotelByLocation.result[0].country_trans} - прекрасная страна!
         </h2>
         <div className="popular-hotels-cards flex">
-          <PopularHotelCard
-            hotel={
-              hotelByLocation.result[
-                getRundomNum(hotelByLocation.result.length)
-              ]
-            }
-          />
-          <PopularHotelCard
-            hotel={
-              hotelByLocation.result[
-                getRundomNum(hotelByLocation.result.length)
-              ]
-            }
-          />
-          <PopularHotelCard
-            hotel={
-              hotelByLocation.result[
-                getRundomNum(hotelByLocation.result.length)
-              ]
-            }
-          />
-          <PopularHotelCard
-            hotel={
-              hotelByLocation.result[
-                getRundomNum(hotelByLocation.result.length)
-              ]
-            }
-          />
+          {[...new Array(4)].map((val, index) => (
+            <PopularHotelCard
+              hotel={
+                hotelByLocation.result[
+                  getRundomNum(hotelByLocation.result.length)
+                ]
+              }
+              key={index}
+            />
+          ))}
         </div>
       </div>
     </div>
@@ -101,6 +87,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
   getCitiesData: () => dispatch(getCitiesData()),
+  getIdByLocation: (city) => dispatch(getIdByLocation(city)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Landing);

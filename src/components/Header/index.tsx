@@ -13,26 +13,16 @@ import { Link } from "react-router-dom";
 
 interface StateProps {
   user: any;
-  hotelsForCompare: number[];
   compareHotelData: any;
 }
 interface DispatchProps {
   getUserData: () => Promise<void>;
-  getComparedHotels: (ids: number[]) => Promise<void>;
-  getComparedHotelsMainData: (hotel: any) => Promise<void>;
 }
 
 type HeaderProps = StateProps & DispatchProps;
 
 const Header: React.FC<HeaderProps> = (props) => {
-  const {
-    user,
-    getUserData: getData,
-    hotelsForCompare,
-    compareHotelData,
-    getComparedHotels,
-    getComparedHotelsMainData,
-  } = props;
+  const { getUserData: getData, compareHotelData } = props;
   useEffect(() => {
     getData();
   }, [getData]);
@@ -57,8 +47,8 @@ const Header: React.FC<HeaderProps> = (props) => {
             <div className="compare-icon"></div>
             <div className={`compare-modal ${modalShow ? "" : "hidden"}`}>
               {compareHotelData.length ? (
-                compareHotelData.map((hotel: any) => (
-                  <div className="compare-modal-hotel">
+                compareHotelData.map((hotel: any, index: number) => (
+                  <div className="compare-modal-hotel" key={index}>
                     <div
                       className="compare-modal-img"
                       style={{
@@ -90,14 +80,10 @@ const Header: React.FC<HeaderProps> = (props) => {
 
 const mapStateToProps = (state: AppState): StateProps => ({
   user: state.usersData.user,
-  hotelsForCompare: state.compareHotelsData.hotelsForCompare,
   compareHotelData: state.compareHotelsData.compareHotelData,
 });
 const mapDispatchToProps = (dispatch: AppDispatch): DispatchProps => ({
   getUserData: () => dispatch(getUserData()),
-  getComparedHotels: (ids) => dispatch(getComparedHotels(ids)),
-  getComparedHotelsMainData: (hotel) =>
-    dispatch(getComparedHotelsMainData(hotel)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

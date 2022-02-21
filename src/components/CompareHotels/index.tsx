@@ -54,7 +54,7 @@ const CompareHotelsComponent: React.FC<CompareHotelsComponentProps> = (
         </div>
         <div className="compare-container">
           {compareHotelData.map((hotel: any, index: number) => (
-            <div className="compare-block">
+            <div className="compare-block" key={index}>
               <div className="compare-photos">
                 <Carousel autoplay className="compare-hotel-slider">
                   {comparedHotelsImages[index]
@@ -68,11 +68,7 @@ const CompareHotelsComponent: React.FC<CompareHotelsComponentProps> = (
               <div className="compare-hotel-block">
                 <div className="compare-block-title">Рейтинг отеля</div>
                 <div className="compare-rate-num">{hotel.score}</div>
-                <Rate
-                  allowHalf
-                  disabled
-                  defaultValue={+hotel.review_score / 2}
-                />
+                <Rate allowHalf defaultValue={+hotel.score / 2} disabled />
                 <div className="compare-text">
                   По оценкам гостей: {hotel.word}
                 </div>
@@ -87,9 +83,7 @@ const CompareHotelsComponent: React.FC<CompareHotelsComponentProps> = (
               </div>
               <div className="compare-hotel-block">
                 <div className="compare-block-title">Услуги отеля</div>
-                <div className="compare-text">
-                  {/* {comparedHotelsDescription[index]} */}
-                </div>
+                <div className="compare-text"></div>
               </div>
               <div className="compare-facilities">
                 <ul>

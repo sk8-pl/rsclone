@@ -30,6 +30,8 @@ export interface ICategory {
   id: string;
   name: string;
   selected: number;
+  from: number;
+  to: number;
 }
 
 export interface IFilters {
@@ -41,6 +43,7 @@ export interface IFilters {
 type RulesComponentProps = StateProps & DispatchProps;
 
 const filterIds = [
+  "price_category",
   "facility",
   "free_cancellation",
   "class",
@@ -81,13 +84,15 @@ const RulesComponent: React.FC<RulesComponentProps> = (props) => {
   return (
     <>
       {openFilters ? (
-        filterIds.map((filter) => {
+        filterIds.map((filter, index) => {
           const filtersData = getFiltersById(categories, filter);
           return filtersData ? (
             <CategoryRules
               filter={filtersData}
               categoriesIds={categoriesIds}
               getCategoriesIds={getCategoriesIds}
+              key={index}
+              catId={filter}
             />
           ) : (
             ""
@@ -98,6 +103,7 @@ const RulesComponent: React.FC<RulesComponentProps> = (props) => {
           filter={getFiltersById(categories, "popular")}
           categoriesIds={categoriesIds}
           getCategoriesIds={getCategoriesIds}
+          catId="popular"
         />
       ) : (
         ""

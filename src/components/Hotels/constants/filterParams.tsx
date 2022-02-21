@@ -1,4 +1,3 @@
-import { Price } from "../components/Prices/index";
 import { Guests } from "../components/Guests/index";
 import { DateLeave } from "../components/Dates/DateLeave";
 import { DateArrive } from "../components/Dates/DateArrive";
@@ -9,7 +8,6 @@ export const filterComponents = [
   <DateArrive />,
   <DateLeave />,
   <Guests />,
-  <Price />,
   <Comfortables />,
   <Rules />,
 ];

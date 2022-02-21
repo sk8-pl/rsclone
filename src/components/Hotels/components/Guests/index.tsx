@@ -1,4 +1,3 @@
-import { guestSelect } from "../../constants/filterParams";
 import { Select } from "../Select";
 
 export const Guests = () => (

@@ -12,7 +12,6 @@ const initialState: InitialFiltersState = {
   city: "",
   rooms: 1,
   categories: [],
-  price: [0, 100000],
   categoriesIds: [],
 };
 
@@ -35,8 +34,6 @@ export const filtersReducer = (
       return { ...state, rooms: action.payload };
     case FiltersActionsTypes.CATEGORIES_LOADED:
       return { ...state, categories: action.payload };
-    case FiltersActionsTypes.PRICE_LOADED:
-      return { ...state, price: action.payload };
     case FiltersActionsTypes.CATEGORIESIDS_LOADED:
       return { ...state, categoriesIds: action.payload };
     default:
