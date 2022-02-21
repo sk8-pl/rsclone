@@ -3,7 +3,7 @@ import Cities from "../models/Cities";
 
 const citiesRouter = Router();
 
-citiesRouter.get("/", async (req: Request, res: Response) => {  
+citiesRouter.get("/", async (_req: Request, res: Response) => {  
    try { 
      const citiesData = await Cities.aggregate([{$sample: {size: 5}}]);
      if(!citiesData){

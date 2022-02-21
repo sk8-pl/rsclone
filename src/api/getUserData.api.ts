@@ -11,7 +11,7 @@ export const getUserDataApi = async () => {
   const user = localStorage.getItem("UserData");
   if (!user) return;
   const id = JSON.parse(user).userId;
-  const userData = fetch(`/user/${id}`)
+  const userData = fetch(`https://rsclone-server.herokuapp.com/user/${id}`)
     // eslint-disable-next-line @typescript-eslint/no-shadow
     .then((response) => {
       if (!response.ok) {

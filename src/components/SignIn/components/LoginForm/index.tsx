@@ -20,7 +20,11 @@ const LoginForm = () => {
 
   const loginHandler = async () => {
     try {
-      const data = await request("/login", "POST", { ...forms });
+      const data = await request(
+        "https://rsclone-server.herokuapp.com/login",
+        "POST",
+        { ...forms }
+      );
       auth.login(data.token, data.userId);
       document.location.reload();
     } catch (err: any) {

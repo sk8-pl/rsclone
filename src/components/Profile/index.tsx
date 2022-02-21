@@ -52,7 +52,7 @@ const Profile = () => {
 
   const changeUserDataHandler = async () => {
     try {
-      const url = `/user/${user?._id}`;
+      const url = `https://rsclone-server.herokuapp.com/user/${user?._id}`;
       await request(url, "PATCH", { ...forms });
       setIsModalVisible(false);
       document.location.reload();
