@@ -16,6 +16,12 @@ const HotelCard = (props: any) => {
     (state) => state.usersData.user
   );
 
+  const comparedCard = [...props.hotelsForCompare].includes(props.data.hotel_id)
+    ? true
+    : false;
+  const [compared, setCompared] = useState(
+    [...props.hotelsForCompare].includes(props.data.hotel_id) ? true : false
+  );
   let [favorite, setFavorite] = useState(false);
 
   const favoriteHandler = async () => {
@@ -70,6 +76,42 @@ const HotelCard = (props: any) => {
       <Link to="/hotel">
         <Button className="more-hotel-btn">Подробнее</Button>
       </Link>
+      <div
+        className={`compared-card-btn ${compared ? "active-compare" : ""}`}
+        onClick={() => {
+          if (!compared) {
+            if (props.hotelsForCompare.length < 2) {
+              const arr = [...props.hotelsForCompare, props.data.hotel_id];
+              props.getComparedHotels(arr);
+              setCompared(true);
+              const obj = {
+                id: props.data.hotel_id,
+                country: props.data.country_trans,
+                address: props.data.address_trans,
+                city: props.data.city_trans,
+                distance: props.data.distance_to_cc,
+                hotel: props.data.hotel_name_trans,
+                img: props.data.max_1440_photo_url,
+                score: props.data.review_score,
+                word: props.data.review_score_word,
+              };
+              props.getComparedHotelsMainData([...props.compareHotelData, obj]);
+            }
+          } else {
+            props.getComparedHotels([
+              ...props.hotelsForCompare.filter(
+                (val: string) => val != props.data.hotel_id
+              ),
+            ]);
+            props.getComparedHotelsMainData([
+              ...props.compareHotelData.filter(
+                (val: any) => val.id !== props.data.hotel_id
+              ),
+            ]);
+            setCompared(false);
+          }
+        }}
+      ></div>
     </div>
   );
 };
