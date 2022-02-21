@@ -1,14 +1,9 @@
 .form-header {
     display: flex;
-    justify-content: space-around;
-}
-
-.price-container {
-    display: flex;
     justify-content: space-between;
 }
 
-.date-booking {
+.price-container {
     display: flex;
     justify-content: space-between;
 }
