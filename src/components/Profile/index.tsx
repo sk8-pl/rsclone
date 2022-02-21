@@ -217,9 +217,11 @@ const Profile = () => {
         <div className="booking-info">
           <span className="info-title">Избранное:</span>
           <div className="favorite-hotels-cards">
-            <FavoriteHotelCard />
-            <FavoriteHotelCard />
-            <FavoriteHotelCard />
+            {user?.favoriteHotels?.length === 0
+              ? "Вы еще не добавили отели в избранное"
+              : user?.favoriteHotels?.map((id) => {
+                  return <FavoriteHotelCard data={id} />;
+                })}
           </div>
         </div>
       </div>
