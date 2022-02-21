@@ -6,7 +6,7 @@ export interface GetCitiesDataResponse {
 }
 
 export const getCitiesDataApi = async () => {
-  const cityData = fetch(`/cities`)
+  const cityData = fetch(`https://rsclone-server.herokuapp.com/cities`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(response.statusText);

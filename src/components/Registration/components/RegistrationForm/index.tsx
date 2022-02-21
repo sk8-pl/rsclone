@@ -46,7 +46,9 @@ const RegistrationForm = () => {
 
   const reqisterHandler = async () => {
     try {
-      await request("register", "POST", { ...forms });
+      await request("https://rsclone-server.herokuapp.com/register", "POST", {
+        ...forms,
+      });
     } catch (error) {
       console.log(error);
     }

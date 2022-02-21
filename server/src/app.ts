@@ -23,7 +23,7 @@ async function start() {
   try {
     await mongoose.connect(config.get("mongoUri"));    
     app.get("/", (_req, res) => {
-      res.send(`Hello, it"s me! ${useRouter} Hi`);
+      res.send(`Hello, it"s me!`);
     });
     app.listen(PORT, () => {
       return console.log(`server is listening on ${PORT}`);

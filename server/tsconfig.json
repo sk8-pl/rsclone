@@ -35,6 +35,7 @@
     "baseUrl": "."
   },
   "exclude": [
+    ".eslintrc.js",
     "./tsconfig.json",
     "node_modules"
   ],

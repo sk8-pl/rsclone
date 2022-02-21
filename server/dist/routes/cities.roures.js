@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Cities_1 = __importDefault(require("../models/Cities"));
 const citiesRouter = (0, express_1.Router)();
-citiesRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+citiesRouter.get("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const citiesData = yield Cities_1.default.aggregate([{ $sample: { size: 5 } }]);
         if (!citiesData) {

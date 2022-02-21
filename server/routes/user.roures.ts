@@ -1,11 +1,11 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import User from "../models/User";
 
 const userRouter = Router();
 
 // get UserData
 
-userRouter.get("/:id", async (req, res) => {  
+userRouter.get("/:id", async (req: Request, res: Response) => {  
   try { 
     const userData = await User.findOne({_id:req.params.id}, {password:0});
     res.status(200).json(userData);
@@ -16,7 +16,7 @@ userRouter.get("/:id", async (req, res) => {
  
 //Change user data
 
-userRouter.patch("/:id", async (req, res) => { 
+userRouter.patch("/:id", async (req: Request, res: Response) => { 
    try { 
      const id = req.params.id;
      const { email, name, phone, surname } = req.body; 
@@ -34,7 +34,7 @@ userRouter.patch("/:id", async (req, res) => {
 
 // add/remove favorite hotels
 
-userRouter.patch("/:id/favorite", async (req, res) => {
+userRouter.patch("/:id/favorite", async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
 

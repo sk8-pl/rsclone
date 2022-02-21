@@ -33,7 +33,7 @@ function start() {
         try {
             yield mongoose_1.default.connect(config_1.default.get("mongoUri"));
             app.get("/", (_req, res) => {
-                res.send(`Hello, it"s me! ${auth_routes_1.default} Hi`);
+                res.send(`Hello, it"s me!`);
             });
             app.listen(PORT, () => {
                 return console.log(`server is listening on ${PORT}`);

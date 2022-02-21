@@ -27,7 +27,11 @@ const HotelCard = (props: any) => {
   const favoriteHandler = async () => {
     try {
       const hotelId = props.data.hotel_id.toString();
-      await request(`user/${user?._id}/favorite`, "PATCH", { hotelId });
+      await request(
+        `https://rsclone-server.herokuapp.com/user/${user?._id}/favorite`,
+        "PATCH",
+        { hotelId }
+      );
       dispatch(getUserData());
     } catch (error) {
       console.log(error);
