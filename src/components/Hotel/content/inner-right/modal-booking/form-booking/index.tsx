@@ -35,7 +35,7 @@ const FormBooking = (props: any) => {
       : null;
 
   const priceDay = data.minrate;
-  const valueDays = 4;
+  const valueDays = 1;
   const discount = priceDay * valueDays * 0.05;
   const extraService = 450;
 
@@ -69,7 +69,9 @@ const FormBooking = (props: any) => {
       <Form.Item>
         <div className="price-container">
           <div className="price-discount">Сбор за услуги: скидка 5%</div>
-          <div className="discount-total">0₽</div>
+          <div className="discount-total">
+            -{(priceDay * valueDays * 0.05).toFixed(2)}₽
+          </div>
         </div>
       </Form.Item>
 
@@ -84,7 +86,7 @@ const FormBooking = (props: any) => {
         <div className="price-container">
           <h3 className="price-discount">Итого</h3>
           <h3 className="discount-total">
-            {priceDay * valueDays - discount + extraService}₽
+            {(priceDay * valueDays - discount + extraService).toFixed(2)}₽
           </h3>
         </div>
       </Form.Item>
