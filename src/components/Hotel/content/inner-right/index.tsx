@@ -15,7 +15,7 @@ const InnerRight = (props: any) => {
           lng={props.data.location.longitude}
           lat={props.data.location.latitude}
         />
-        {/* <ModalForm data={props.data} /> */}
+        <ModalForm data={props.data} />
       </div>
     </Suspense>
   );

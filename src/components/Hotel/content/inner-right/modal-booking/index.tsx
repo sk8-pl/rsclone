@@ -5,20 +5,26 @@ import FormBooking from "./form-booking";
 const ModalForm = (props: any) => {
   const data = props.data;
   const [visible, setVisible] = useState(false);
+
   return (
     <>
       <Button type="primary" onClick={() => setVisible(true)}>
         Забронировать номер
       </Button>
       <Modal
-        title="Modal 1000px width"
+        title="Бронирование отеля"
         centered
         visible={visible}
         onOk={() => setVisible(false)}
         onCancel={() => setVisible(false)}
         width={850}
-        cancelText="Отмена"
-        okText="Забронировать"
+        footer={[
+          <Button key="back" onClick={() => setVisible(false)}>
+            Закрыть
+          </Button>,
+        ]}
+        // cancelText="Отмена"
+        // okText="Забронировать"
       >
         <FormBooking data={props.data} />
       </Modal>

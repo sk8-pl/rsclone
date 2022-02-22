@@ -1,10 +1,13 @@
 import "./style.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Select, Button } from "antd";
 import { tailFormItemLayout } from "../../../../constants/tailForm";
 import { DateArrive } from "../../../../../Hotels/components/Dates/DateArrive";
 import { DateLeave } from "../../../../../Hotels/components/Dates/DateLeave";
 import { useParams } from "react-router";
+import { AppState } from "../../../../../../store";
+import { useSelector } from "react-redux";
+import { GetUserDataResponse } from "../../../../../../api/getUserData.api";
 
 const { Option } = Select;
 
@@ -13,6 +16,8 @@ type LayoutType = Parameters<typeof Form>[0]["layout"];
 const FormBooking = (props: any) => {
   const data = props.data;
   const { id } = useParams();
+  const [adult, setAdult] = useState("");
+  const [child, setChild] = useState("");
 
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState<LayoutType>("horizontal");
@@ -30,9 +35,9 @@ const FormBooking = (props: any) => {
       : null;
 
   const priceDay = data.minrate;
-  const valueDays = 4;
-  const discount = 300;
-  const extraService = 300;
+  const valueDays = 1;
+  const discount = priceDay * valueDays * 0.05;
+  const extraService = 450;
 
   return (
     <Form
@@ -43,26 +48,14 @@ const FormBooking = (props: any) => {
       onValuesChange={onFormLayoutChange}
     >
       <div className="form-header">
-        <div className="form-header_left">ID Отеля{id}</div>
-        <div className="form-header_right">{priceDay}₽ в сутки</div>
+        <h2 className="form-header_left">ID Отеля {id}</h2>
+        <h2 className="form-header_right">{priceDay}₽ в сутки</h2>
       </div>
 
       <div className="date-booking">
         <DateArrive />
         <DateLeave />
       </div>
-
-      <Form.Item
-        name="guest"
-        label="Гости"
-        rules={[{ required: true, message: "Гости" }]}
-      >
-        <Select placeholder="выберите количество гостей">
-          <Option value="1">1 гость</Option>
-          <Option value="2">2 гостя</Option>
-          <Option value="3">3 гостя</Option>
-        </Select>
-      </Form.Item>
 
       <Form.Item>
         <div className="price-container">
@@ -75,10 +68,10 @@ const FormBooking = (props: any) => {
 
       <Form.Item>
         <div className="price-container">
-          <div className="price-discount">
-            Сбор за услуги: скидка {discount}₽
+          <div className="price-discount">Сбор за услуги: скидка 5%</div>
+          <div className="discount-total">
+            -{(priceDay * valueDays * 0.05).toFixed(2)}₽
           </div>
-          <div className="discount-total">0₽</div>
         </div>
       </Form.Item>
 
@@ -91,10 +84,10 @@ const FormBooking = (props: any) => {
 
       <Form.Item>
         <div className="price-container">
-          <div className="price-discount">Итого</div>
-          <div className="discount-total">
-            {priceDay * valueDays - discount + extraService}₽
-          </div>
+          <h3 className="price-discount">Итого</h3>
+          <h3 className="discount-total">
+            {(priceDay * valueDays - discount + extraService).toFixed(2)}₽
+          </h3>
         </div>
       </Form.Item>
 
