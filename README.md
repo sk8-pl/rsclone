@@ -1,5 +1,6 @@
 SkyHotel (RS-Clone)
 =============================
+[Link demo app](https://trusting-aryabhata-0714bb.netlify.app/)
 
 STACK
 ------------
