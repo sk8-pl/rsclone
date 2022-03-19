@@ -26,3 +26,6 @@ QUICK START
 2. Go to folder `/rsclone/server`, to install all dependencies use [`npm install`](https://docs.npmjs.com/cli/install) 
 3. Go to root folder `/rsclone`, to install all dependencies use [`npm install`](https://docs.npmjs.com/cli/install)   
 4. Run server & app `npm run dev` in command line
+
+
+[RACI matrix](https://docs.google.com/spreadsheets/d/1X58XCUFcG4yEPAv-GUkUcwUsyX-ekokds16R43Ttu-A/edit?usp=sharing)
