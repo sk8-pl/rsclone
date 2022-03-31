@@ -2,6 +2,12 @@ SkyHotel (RS-Clone)
 =============================
 [Link demo app](https://trusting-aryabhata-0714bb.netlify.app/)
 
+
+[Medium.com article](https://medium.com/@olkamichi/rs-clone-%D1%84%D0%B8%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-%D0%B2-rsschool-79a1351fec1c)
+
+
+[api: disabled](https://rapidapi.com/tipsters/api/booking-com/)
+
 STACK
 ------------
 
